@@ -1,54 +1,58 @@
+/************************
+ * General layout rules *
+ ************************/
+
 body, html, head, h1 {
-	padding: 0px;
-   margin: 0px;
+ padding: 0px;
+ margin: 0px;
 }
 
-div.footer {
-	margin-right: 4px;
-	text-align: center;
-}
-
-p.copyright {
-	font-size: 9pt;
-}
-
-th {
-	text-align: left;
-}
+/***********************
+ * Header layout rules *
+ ***********************/
 
 table.header {
-	margin: 0px;
-	width: 100%;
-   padding-left: 8px;
-   padding-top: 4px;
-   padding-bottom: 0px;
-}
-
-table.body {
-	margin-left: 4px;
-}
-
-table.ports-cats {
-	width: 100%;
-}
-
-table.ports-list {
-	width: 100%;
-	padding: 2px;
+ margin: 0px;
+ width: 100%;
+ padding-left: 8px;
+ padding-top: 4px;
+ padding-bottom: 0px;
 }
 
 td.menu {
-	float: right;
-   vertical-align: top;
-   text-align: right;
-   padding-right: 8px;
-   padding-top: 6px;
-   color: #9cf;
+ float: right;
+ vertical-align: top;
+ text-align: right;
+ padding-right: 8px;
+ padding-top: 6px;
 }
 
 td.logo {
-	padding-top: 20px;
-	padding-bottom: 0px;
-	float: left;
-	vertical-align: bottom;
+ padding-top: 20px;
+ padding-bottom: 0px;
+ float: left;
+ vertical-align: bottom;
+}
+
+
+/*********************
+ * Body layout rules *
+ *********************/
+
+table.body {
+ margin-left: 4px;
+ margin-right: 4px;
+}
+
+/**********************
+ * ports layout rules *
+ **********************/
+
+/***********************
+ * Footer layout rules *
+ ***********************/
+
+div.footer {
+ margin-right: 4px;
+ text-align: center;
 }

@@ -1,59 +1,76 @@
-table.header {
-	background-color: #69c;
-}
-
-table.ports-cats {
-	font-size: 10pt;
-}
-
-table.ports-list {
-	font-size: 10pt;
-}
+/************************
+ * General markup rules *
+ ************************/
 
 a:link, a:visited {
-  color: black;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-img.footer {
-	border: 0;
+ color: black;
+ font-weight: bold;
+ text-decoration: none;
 }
 
 a:hover {
-	color: black;
-   font-weight: bold;
-   text-decoration: underline;
+ color: black;
+ font-weight: bold;
+ text-decoration: underline;
 }
 
-a.footer:link, a.footer:visited {
-	border: 0;
-	color: black;
-	text-decoration: none;
-	font-weight: normal
+img {
+ border: 0px;
 }
 
-a.footer:hover {
-	border: 0;
-	color: black;
-	font-weight: normal;
-	text-decoration: underline;
-}
+/***********************
+ * Header markup rules *
+ ***********************/
 
-a.menu_item:link, a.menu_item:visited {
-  color: #fff;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-a.menu_item:hover {
-	color: #fff;
-   font-weight: bold;
-   text-decoration: underline;
+table.header {
+ background-color: #69c;
 }
 
 td.logo {
-   font-weight: bold;
-   font-size: 0.9em;
-   color: #fff;
+ color: #fff;
+ font-weight: bold;
+}
+
+td.menu {
+ color: #9cf;
+}
+
+a.menu_item:link, a.menu_item:visited {
+ color: #fff;
+ font-weight: bold;
+ text-decoration: none;
+}
+
+a.menu_item:hover {
+ color: #fff;
+ font-weight: bold;
+ text-decoration: underline;
+}
+
+/*********************
+ * Body markup rules *
+ *********************/
+
+/**********************
+ * ports markup rules *
+ **********************/
+
+/***********************
+ * Footer markup rules *
+ ***********************/
+
+a.footer:link, a.footer:visited, a.copyright:link, a.copyright:visited {
+ color: black;
+ text-decoration: none;
+ font-weight: normal
+}
+
+a.footer:hover, a.copyright:hover {
+ color: black;
+ font-weight: normal;
+ text-decoration: underline;
+}
+
+p.copyright {
+ font-size: 9pt;
 }
