@@ -1,0 +1,30 @@
+#include "template.inc"
+
+<divert TITLE>Unofficial OpenBSD Ports Project</divert>
+
+<divert BODY>
+<h2><dump TITLE /></h2>
+
+<p>Things you'll find on this website related to <a href="http://www.openbsd.org">OpenBSD</a> <a href="http://www.openbsd.org/ports.html">ports</a></p>
+
+<ul>
+
+<li><a href="<get-var ROOT />/ports.html">Ports</a>:
+<dump PORTSINDEX />
+</li>
+
+<li><a href="<get-var ROOT />/docs.html">Tutorial about using unofficial OpenBSD ports</a></li>
+
+<li><a href="<get-var ROOT />/code.html">Code</a>:
+<ul>
+<li><a href="<get-var ROOT />/code/p2w.html">Code for generating a web-interface to the ports tree</a></li>
+</ul>
+</li>
+
+<li><a href="<get-var ROOT />/links.html">Links to other websites related to the OpenBSD ports collection</a></li>
+
+<li><a href="<get-var ROOT /></about.html">About this site</a></li>
+ 
+</ul>
+
+</divert>

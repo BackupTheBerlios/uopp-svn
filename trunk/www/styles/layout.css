@@ -1,0 +1,32 @@
+body, html, head, h1 {
+	padding: 0px;
+   margin: 0px;
+}
+
+table.header {
+	margin: 0px;
+	width: 100%;
+   padding-left: 8px;
+   padding-top: 4px;
+   padding-bottom: 0px;
+}
+
+table.body {
+	margin-left: 4px;
+}
+
+td.menu {
+	float: right;
+   vertical-align: top;
+   text-align: right;
+   padding-right: 8px;
+   padding-top: 6px;
+   color: #9cf;
+}
+
+td.logo {
+	padding-top: 20px;
+	padding-bottom: 0px;
+	float: left;
+	vertical-align: bottom;
+}

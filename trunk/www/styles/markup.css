@@ -1,0 +1,33 @@
+table.header {
+	background-color: #69c;
+}
+
+a:link, a:visited {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover {
+	color: black;
+   font-weight: bold;
+   text-decoration: underline;
+}
+
+a.menu_item:link, a.menu_item:visited {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a.menu_item:hover {
+	color: #fff;
+   font-weight: bold;
+   text-decoration: underline;
+}
+
+td.logo {
+   font-weight: bold;
+   font-size: 0.9em;
+   color: #fff;
+}
