@@ -15,6 +15,7 @@ PERMIT_DISTFILES_CDROM= Yes
 PERMIT_DISTFILES_FTP=	Yes
 
 MASTER_SITES=		http://www.thewml.org/distrib/
+WANTLIB=		perl c util m ncurses 
 
 MODULES=		gettext
 LIB_DEPENDS=		png.4::graphics/png
