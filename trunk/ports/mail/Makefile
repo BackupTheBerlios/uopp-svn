@@ -1,5 +1,6 @@
 # $OpenBSD$
 
+SUBDIR+= autorespond
 SUBDIR+= dovecot
 SUBDIR+= ezmlm-idx
 SUBDIR+= qmail

@@ -1,0 +1,12 @@
+$OpenBSD$
+--- Makefile.orig	Sun Mar 13 02:02:29 2005
++++ Makefile	Sun Mar 13 02:02:36 2005
+@@ -3,7 +3,7 @@ OPTS=-O2
+ LIBS=
+ CFLAGS=-Wall -g
+ DESTDIR=
+-PREFIX=$(DESTDIR)/usr
++PREFIX=$(DESTDIR)/usr/local
+ 
+ all: autorespond
+ 

@@ -1,0 +1,5 @@
+@comment $OpenBSD$
+bin/autorespond
+share/man/
+share/man/man1/
+@man share/man/man1/autorespond.1

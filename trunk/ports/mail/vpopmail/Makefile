@@ -15,9 +15,8 @@ PERMIT_DISTFILES_FTP=	Yes
 
 MASTER_SITES=		 ${MASTER_SITE_SOURCEFORGE:=vpopmail/}	
 
-#BUILD_DEPENDS=		???
-#RUN_DEPENDS=		???
-#LIB_DEPENDS=		???
+RUN_DEPENDS=		:qmail-*:uopp/mail/qmail
+BUILD_DEPENDS=		:qmail-*:uopp/mail/qmail
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS=		--enable-qmaildir=/var/qmail \
@@ -31,7 +30,7 @@ CONFIGURE_ARGS=		--enable-qmaildir=/var/qmail \
 			--enable-auth-module=cdb \
 			--enable-logging=p
 			
-
+INSTALL_TARGET=		install-strip
 PREFIX=			/home/users/vpopmail
 
 pre-configure:
