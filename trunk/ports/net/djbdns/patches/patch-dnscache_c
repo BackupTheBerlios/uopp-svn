@@ -1,0 +1,12 @@
+$OpenBSD$
+--- dnscache.c.orig	2004-09-06 13:40:10.000000000 -0600
++++ dnscache.c	2004-09-06 13:40:10.000000000 -0600
+@@ -63,7 +63,7 @@ struct interf {
+ 
+ struct interf *interhead = 0;
+ 
+-#define MAXUDP 200
++#define MAXUDP 512
+ static struct udpclient {
+   struct query q;
+   struct taia start;

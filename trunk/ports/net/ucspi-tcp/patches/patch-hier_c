@@ -1,0 +1,14 @@
+$OpenBSD$
+--- hier.c.orig	2000-03-18 08:18:42.000000000 -0700
++++ hier.c	2004-09-06 13:43:59.000000000 -0600
+@@ -2,8 +2,8 @@
+ 
+ void hier()
+ {
+-  h(auto_home,-1,-1,02755);
+-  d(auto_home,"bin",-1,-1,02755);
++  h(auto_home,-1,-1,0755);
++  d(auto_home,"bin",-1,-1,0755);
+ 
+   c(auto_home,"bin","tcpserver",-1,-1,0755);
+   c(auto_home,"bin","tcprules",-1,-1,0755);

@@ -1,0 +1,21 @@
+$OpenBSD$
+--- Makefile.orig	2001-02-11 14:11:45.000000000 -0700
++++ Makefile	2004-09-06 13:40:10.000000000 -0600
+@@ -191,7 +191,7 @@ buffer.h uint32.h
+ 	./compile cdb_make.c
+ 
+ check: \
+-it instcheck
++instcheck
+ 	./instcheck
+ 
+ chkshsgr: \
+@@ -778,7 +778,7 @@ taia.h
+ 	./compile server.c
+ 
+ setup: \
+-it install
++install
+ 	./install
+ 
+ sgetopt.o: \

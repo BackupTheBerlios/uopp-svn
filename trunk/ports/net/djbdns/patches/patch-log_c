@@ -1,0 +1,17 @@
+$OpenBSD$
+--- log.c.orig	2001-02-11 14:11:45.000000000 -0700
++++ log.c	2004-09-06 13:40:10.000000000 -0600
+@@ -94,6 +94,13 @@ void log_startup(void)
+   line();
+ }
+ 
++void log_listen(const char addr[4])
++{
++  string("listening on ");
++  ip(addr);
++  line();
++}
++
+ void log_query(uint64 *qnum,const char client[4],unsigned int port,const char id[2],const char *q,const char qtype[2])
+ {
+   string("query "); number(*qnum); space();

@@ -1,0 +1,11 @@
+$OpenBSD$
+--- log.h.orig	2001-02-11 14:11:45.000000000 -0700
++++ log.h	2004-09-06 13:40:10.000000000 -0600
+@@ -4,6 +4,7 @@
+ #include "uint64.h"
+ 
+ extern void log_startup(void);
++extern void log_listen(const char *);
+ 
+ extern void log_query(uint64 *,const char *,unsigned int,const char *,const char *,const char *);
+ extern void log_querydrop(uint64 *);
