@@ -27,9 +27,9 @@ bin/ezmlm-tstdig
 bin/ezmlm-unsub
 bin/ezmlm-warn
 bin/ezmlm-weed
-bin/ezmlmglrc
-bin/ezmlmrc
-bin/ezmlmsubrc
+@comment bin/ezmlmglrc
+@comment bin/ezmlmrc
+@comment bin/ezmlmsubrc
 @man man/cat1/ezmlm-accept.0
 @man man/cat1/ezmlm-archive.0
 @man man/cat1/ezmlm-check.0
@@ -96,8 +96,12 @@ bin/ezmlmsubrc
 @man man/man5/ezmlmsubrc.5
 share/examples/ezmlm-idx/
 share/examples/ezmlm-idx/ezcgirc
+@sample /etc/ezmlm/
+@sample /etc/ezmlm/ezcgirc
 share/examples/ezmlm-idx/ezmlmglrc
+@sample /etc/ezmlm/ezmlmglrc
 share/examples/ezmlm-idx/ezmlmrc
+@sample /etc/ezmlm/ezmlmrc
 share/examples/ezmlm-idx/ezmlmrc.ch_GB
 share/examples/ezmlm-idx/ezmlmrc.cs
 share/examples/ezmlm-idx/ezmlmrc.da
@@ -116,3 +120,4 @@ share/examples/ezmlm-idx/ezmlmrc.pt_BR
 share/examples/ezmlm-idx/ezmlmrc.ru
 share/examples/ezmlm-idx/ezmlmrc.sv
 share/examples/ezmlm-idx/ezmlmsubrc
+@sample /etc/ezmlm/ezmlmsubrc
