@@ -81,6 +81,10 @@ p.ports-entry {
  line-height: 50%;
 }
 
+span.ports-entry-value {
+ line-height: 100%;
+}
+
 /***********************
  * Footer layout rules *
  ***********************/

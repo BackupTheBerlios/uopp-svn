@@ -2,6 +2,8 @@ TARGETS+=*.html *.wml *.gif *.png *.jpg *.jpeg *.pdf *.css *.tgz
 
 .SUFFIXES: .html .wml
 
+.PHONY: upload empty-indexes tidy linklint permissions
+
 _SUBDIRUSE: .USE
 	@for subdir in $$(find . -type d -maxdepth 1 -mindepth 1 | grep -v .svn | cut -d"/" -f2 ); \
 	do \
@@ -18,21 +20,22 @@ _SUBDIRUSE: .USE
 	@chmod 664 ${DESTDIR}/${.TARGET}
 
 *.wml: destdir
-	@wml -o ${DESTDIR}/${.PREFIX}.html -I${TOPDIR} ${.PREFIX}.wml
+	@wml -I${TOPDIR} ${.PREFIX}.wml > ${DESTDIR}/${.PREFIX}.html
 	@chmod 664 ${DESTDIR}/${.PREFIX}.html
 
 build: _SUBDIRUSE ${TARGETS}
 
 empty-indexes:
-	@(cd ${DESTDIR} && for i in $$(find * -type d); do touch $${i}/index.html; done)
+	@(cd ${DESTDIR} && find * -type d | xargs -I NAME touch NAME/index.html)
 
 tidy:
-	@(cd ${DESTDIR} && for i in $$(find * -type f -name "*.html"); do \
-	/usr/local/lib/wml/exec/wml_aux_tidy -i -m -utf8 -quiet $${i} 2>&1; done)
+	@(cd ${DESTDIR} && (find * -type f -name "*html" | xargs -I NAME \
+	/usr/local/lib/wml/exec/wml_aux_tidy -q -i -config ${TOPDIR}/tidy_config -m NAME 2>&1) \
+	|| true)
 
 linklint:
 	@(cd ${DESTDIR} && /usr/local/lib/wml/exec/wml_aux_linklint \
-		-textonly -error -warn -silent /\@)
+		-textonly -error -silent /\@)
 
 clean:
 	@rm -rf ${DESTDIR}
@@ -40,14 +43,12 @@ clean:
 destdir:
 	@mkdir -p ${DESTDIR}
 
-upload: tidy empty-indexes
-	@(cd ${DESTDIR} && chmod 644 $$(find * -type f) && chmod 755 $$(find * -type d))
- 	@rsync --recursive --links --times ${DESTDIR}/ shell.berlios.de:/home/groups/uopp/htdocs/	
+permissions:
+	@(cd ${DESTDIR} && find * -type f | xargs chmod 644 && find * -type d | xargs chmod 755) 
 
-upload-destructive: tidy empty-indexes
-	@(cd ${DESTDIR} && chmod 644 $$(find * -type f) && chmod 755 $$(find * -type d) )
-	@rsync --recursive --links --times --delete \
-		${DESTDIR}/ shell.berlios.de:/home/groups/uopp/htdocs/
+upload: tidy empty-indexes permissions
+	@(rsync -q --progress --recursive ${DESTDIR}/ \
+	shell.berlios.de:/home/groups/uopp/htdocs/)
 
 ####### Ports section
 
@@ -78,7 +79,7 @@ update-unofficial:
 clean-unofficial:
 	@rm -rf ports/current/uopp
 
-${TAGS} current: clean-ports make-wml templates 
+${TAGS} current: clean-ports update-cvs make-wml templates 
 
 unofficial: clean-unofficial update-unofficial make-wml-unofficial templates-unofficial snapshot
 
@@ -106,7 +107,7 @@ make-wml-unofficial:
 	@mkdir -p ${TOPDIR}/ports/current/uopp
 	@(cd ${P2WDIR} && PORTSDIR=${TOPDIR}/../ports/current \
 		PORTSDIR_PATH=${TOPDIR}/../ports/current/uopp:${TOPDIR}/../ports/current \
-                PORTSDIR_VERSION=${.TARGET} \
+                PORTSDIR_VERSION=unofficial \
                 BASE_INPUTDIR=${TOPDIR}/../ports/current/uopp \
                 BASE_OUTPUTDIR=${TOPDIR}/ports/current/uopp \
                 BASE_ROOTPATH=/ports/current/uopp \
