@@ -1,6 +1,7 @@
 # $OpenBSD$
 
-SUBDIR += gtkhtml 
+SUBDIR += weex
+SUBDIR += wml
 
 .include <bsd.port.subdir.mk>
 

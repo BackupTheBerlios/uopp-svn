@@ -1,0 +1,17 @@
+$OpenBSD$
+--- po/Makefile.in.in.orig	2000-04-24 16:44:53.000000000 +0200
++++ po/Makefile.in.in	2004-08-07 09:52:13.000000000 +0200
+@@ -18,10 +18,10 @@ VPATH = @srcdir@
+ 
+ prefix = @prefix@
+ exec_prefix = @exec_prefix@
+-datadir = $(prefix)/@DATADIRNAME@
++datadir = $(DESTDIR)$(prefix)/@DATADIRNAME@
+ localedir = $(datadir)/locale
+-gnulocaledir = $(prefix)/share/locale
+-gettextsrcdir = $(prefix)/share/gettext/po
++gnulocaledir = $(DESTDIR)$(prefix)/share/locale
++gettextsrcdir = $(DESTDIR)$(prefix)/share/gettext/po
+ subdir = po
+ 
+ INSTALL = @INSTALL@
