@@ -31,7 +31,7 @@ WANTLIB+=		m z
 
 CONFIGURE_STYLE= autoconf
 AUTOCONF_VERSION= 2.59
-CONFIGURE_ARGS+=--without-pam --without-shadow --without-vpopmail \
+CONFIGURE_ARGS+=--without-pam --without-shadow --with-vpopmail \
 		--localstatedir=/var --with-ssldir=/etc/ssl --with-ssl=openssl
 CONFIGURE_ENV=	LDFLAGS="-L${LOCALBASE}/lib" \
 		CFLAGS="${CFLAGS} -I${LOCALBASE}/include"
