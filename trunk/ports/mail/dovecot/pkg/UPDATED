@@ -1,0 +1,2 @@
+This is an adaption of the dovecot port in the main OpenBSD ports-tree.
+The only change is a patch to use the bsd_auth mechanism instead of the /etc/passwd* files.
