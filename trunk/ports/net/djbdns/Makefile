@@ -11,6 +11,7 @@ MASTER_SITES=	http://cr.yp.to/djbdns/ \
 MASTER_SITES0=	ftp://ftp.innominate.org/gpa/djb/
 HOMEPAGE=	http://cr.yp.to/djbdns.html
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX} ${DISTNAME}-man${EXTRACT_SUFX}:0
+WANTLIB= c
 
 PERMIT_PACKAGE_CDROM=	No
 PERMIT_PACKAGE_FTP=	Yes

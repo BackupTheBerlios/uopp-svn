@@ -10,6 +10,8 @@ MASTER_SITES=	http://cr.yp.to/daemontools/ \
 		ftp://ftp.id.wustl.edu/pub/qmail/
 WRKDIST=	${WRKDIR}/admin/daemontools-0.76
 
+WANTLIB= c
+
 PERMIT_PACKAGE_CDROM=	No
 PERMIT_PACKAGE_FTP=	Yes
 PERMIT_DISTFILES_CDROM=	Yes

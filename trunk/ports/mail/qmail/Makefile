@@ -1,3 +1,5 @@
+# $OpenBSD$
+
 COMMENT=		"secure, reliable, efficient, simple MTA"
 
 DISTNAME=	 	qmail-1.03	
@@ -20,10 +22,12 @@ RUN_DEPENDS=		tcpserver::uopp/net/ucspi-tcp
 
 ALL_TARGET=		it man	
 
+WANTLIB= c
+
 PREFIX=/var/qmail
 
 pre-build:
-	@${SUDO} ${SH} ${PKGDIR}/PREINSTALL
+	@${SUDO} ${SH} ${PKGDIR}/../files/PREBUILD
 	@echo ${CC} ${CFLAGS} > ${WRKSRC}/conf-cc
 	@echo ${WRKINST}/var/qmail > ${WRKSRC}/conf-qmail
 	@(cd ${WRKSRC} && make install-static && make clean)

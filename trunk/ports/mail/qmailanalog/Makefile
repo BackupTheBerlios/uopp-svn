@@ -5,8 +5,7 @@ COMMENT=	"tools to analyze qmail-send's activity record"
 DISTNAME=	qmailanalog-0.70
 HOMEPAGE=	http://cr.yp.to/qmailanalog.html
 CATEGORIES=	mail	
-NEED_VERSION=	1.230
-MAINTAINER=	Giacomo Cariello <jwk@bug.it>
+MAINTAINER=	Thomas Delaet <thomas@delaet.org>	
 MASTER_SITES=	http://cr.yp.to/software/ \
 		ftp://ftp.net.ohio-state.edu/pub/networking/mail/qmail/ \
 		ftp://ftp.ntnu.no/pub/unix/mail/qmail/ \
@@ -22,8 +21,7 @@ PERMIT_DISTFILES_CDROM=	Yes
 PERMIT_PACKAGE_FTP=	Yes
 PERMIT_PACKAGE_CDROM=	Yes
 
-# only used for RUN_DEPENDS, below
-QMAILDIR=	/var/qmail
+WANTLIB=c
 
 ALL_TARGET=	default
 INSTALL_TARGET=	setup check

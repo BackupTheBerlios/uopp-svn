@@ -1,4 +1,13 @@
 @comment $OpenBSD$
+@newgroup qmail:!2850
+@newgroup nofiles:!32750
+@newuser alias:!2849:nofiles:::/var/qmail/alias:/sbin/nologin
+@newuser qmaild:!2850:nofiles:::/var/qmail:/sbin/nologin
+@newuser qmaill:!2851:nofiles:::/var/qmail:/sbin/nologin
+@newuser qmailp:!2852:nofiles:::/var/qmail:/sbin/nologin
+@newuser qmailq:!2853:qmail:::/var/qmail:/sbin/nologin
+@newuser qmailr:!2854:qmail:::/var/qmail:/sbin/nologin
+@newuser qmails:!2855:qmail:::/var/qmail:/sbin/nologin
 alias/
 bin/
 bin/bouncesaying

@@ -17,6 +17,7 @@ MASTER_SITES=	http://cr.yp.to/ucspi-tcp/ \
 		ftp://ftp.jp.qmail.org/qmail/ \
 		ftp://ftp.rifkin.technion.ac.il/pub/qmail/ \
 		http://koobera.math.uic.edu/www/software/
+WANTLIB= c
 
 PERMIT_PACKAGE_CDROM=	No
 PERMIT_PACKAGE_FTP=	Yes
