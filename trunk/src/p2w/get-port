@@ -1,0 +1,210 @@
+#!/bin/sh
+
+P2WDIR=$(cat $ENVDIR/P2WDIR)
+
+. ${P2WDIR}/functions
+
+cd ${PORTSDIR}/${FPATH} &&
+OLD_IFS=${IFS}
+IFS="-"
+PKG=""
+VERSION=""
+
+#echo "NAME: $FPATH, FLAVOR=$FLAVOR, SUBPACKAGE=${SUBPACKAGE}E" > /dev/stderr
+
+if [ -n "$FLAVOR" ]
+then
+	if [ -n "$SUBPACKAGE" ]
+	then
+		LIST=$(SUBPACKAGE=${SUBPACKAGE} FLAVOR=${FLAVOR} make _print-packagename)
+		COMMENT=$(SUBPACKAGE=${SUBPACKAGE} FLAVOR=${FLAVOR} make show=_COMMENT)	
+		URL=$(SUBPACKAGE=${SUBPACKAGE} FLAVOR=${FLAVOR} make show=HOMEPAGE)
+		DESCR=$(SUBPACKAGE=${SUBPACKAGE} FLAVOR=${FLAVOR} make show=DESCR)
+		MAINTAINER=$(SUBPACKAGE=${SUBPACKAGE} FLAVOR=${FLAVOR} make show=MAINTAINER)
+		BUILD_DEPENDS=$(SUBPACKAGE=${SUBPACKAGE} FLAVOR=${FLAVOR} make build-dir-depends) 
+		RUN_DEPENDS=$(SUBPACKAGE=${SUBPACKAGE} FLAVOR=${FLAVOR} make run-dir-depends)
+	else
+		unset SUBPACKAGE
+		LIST=$(FLAVOR=${FLAVOR} make _print-packagename)
+		COMMENT=$(FLAVOR=${FLAVOR} make show=_COMMENT)
+                URL=$(FLAVOR=${FLAVOR} make show=HOMEPAGE)
+                DESCR=$(FLAVOR=${FLAVOR} make show=DESCR)
+                MAINTAINER=$(FLAVOR=${FLAVOR} make show=MAINTAINER)
+		BUILD_DEPENDS=$(FLAVOR=${FLAVOR} make build-dir-depends)
+		RUN_DEPENDS=$(FLAVOR=${FLAVOR} make run-dir-depends)
+	fi
+else 
+	if [ -n "$SUBPACKAGE" ]
+	then
+		unset FLAVOR
+		LIST=$(SUBPACKAGE=${SUBPACKAGE} make _print-packagename)
+		COMMENT=$(SUBPACKAGE=${SUBPACKAGE} make show=_COMMENT)
+                URL=$(SUBPACKAGE=${SUBPACKAGE} make show=HOMEPAGE)
+                DESCR=$(SUBPACKAGE=${SUBPACKAGE} make show=DESCR)
+                MAINTAINER=$(SUBPACKAGE=${SUBPACKAGE} make show=MAINTAINER)
+		BUILD_DEPENDS=$(SUBPACKAGE=${SUBPACKAGE} make build-dir-depends)
+		RUN_DEPENDS=$(SUBPACKAGE=${SUBPACKAGE} make run-dir-depends)
+	else
+		unset FLAVOR
+		unset SUBPACKAGE
+		LIST=$(make _print-packagename) 
+		COMMENT=$(make show=_COMMENT)
+                URL=$(make show=HOMEPAGE)
+                DESCR=$(make show=DESCR)
+                MAINTAINER=$(make show=MAINTAINER)
+		BUILD_DEPENDS=$(make build-dir-depends)
+		RUN_DEPENDS=$(make run-dir-depends)
+	fi
+fi
+
+for i in ${LIST} 
+do
+	if [ -n "$(echo ${i} | grep ^[0-9])" ]
+	then
+		IN_VERSION="true"
+	fi
+	if [ "${IN_VERSION}" == "true" ]
+	then
+		if [ -n "${VERSION}" ]
+		then
+			VERSION="${VERSION}-"
+		fi
+		VERSION="${VERSION}${i}"
+	else
+		if [ -n "${PKG}" ]
+		then
+			PKG="${PKG}-"
+		fi
+		PKG="${PKG}${i}"
+	fi
+done
+
+COMMENT=$(echo $COMMENT | sed -e 's|^"||' -e 's|"$||' -e "s|^'||" -e "s|'$||" \
+	-e 's/&/\&amp;/g' -e 's/>/\&gt;/g' -e 's/</\&lt;/g')
+
+IFS="${OLD_IFS}"
+
+if [ "${1}" == "PKG" ]
+then
+	echo ${PKG}
+elif [ "${1}" == "VERSION" ]
+then
+	echo ${VERSION}
+elif [ "${1}" == "COMMENT" ]
+then
+	echo $COMMENT
+elif [ "${1}" == "ROW" ]
+then
+	echo -n '<tr class="port-summary">'
+	echo -n "<td class=\"port-summary-pkg\">"
+	echo -n "<a class=\"port-summary\" href=\"${TREE_ROOTPATH}/${FPATH}/${LIST}.html\">${PKG}</a>" 
+	echo -n "</td>"
+	echo -n "<td class=\"port-summary-version\">${VERSION}</td>"
+	echo -n "<td class=\"port-summary-comment\">${COMMENT}</td>"
+	echo '</tr>'	
+elif [ "${1}" == "FILENAME" ]
+then
+	echo ${LIST}
+elif [ "${1}" == "URL" ]
+then
+	echo ${URL}
+elif [ "${1}" == "DESCR" ]
+then
+	echo ${DESCR}
+elif [ "${1}" == "MAINTAINER" ]
+then
+	echo ${MAINTAINER} | sed -e 's/@/ at NOSPAM/g' -e 's/</(/g' -e 's/>/)/g'
+elif [ "${1}" == "BUILD_DEPENDS" ]
+then
+	BUILD_DEPENDS=$(echo ${BUILD_DEPENDS} | tsort | sed -e '1D')
+	if [ -n "${BUILD_DEPENDS}" ]
+	then
+		echo '<p class="ports-entry">'
+		echo '<span class="ports-entry-description">Build Dependencies</span>'
+		echo '</p>'
+		echo "<table class=\"ports-list\">"
+		echo '<tr class="ports-list-header">'
+		echo '<td class="ports-list-header">Name</td>'
+		echo '<td class="ports-list-header">Version</td>'
+		echo '<td class="ports-list-header">Comment</td>'
+		echo '</tr>'
+		for i in ${BUILD_DEPENDS}
+		do
+			SUBPACKAGE=""
+			FLAVOR=""
+			for j in $(echo ${i} | cut -d"," -s -f2- | sed -e 's/,/ /g')
+			do
+                                if [ -n "$(echo ${j} | grep '^-')" ]
+                                then
+                                        if [ -n "${SUBPACKAGE}" ]
+                                        then
+                                                SUBPACKAGE="${SUBPACKAGE} ${j}"
+                                        else
+                                                SUBPACKAGE=${j}
+                                        fi
+                                else
+                                        if [ -n "${FLAVOR}" ]
+                                        then
+                                                FLAVOR="${FLAVOR} ${j}"
+                                        else
+                                                FLAVOR=${j}
+                                        fi
+                                fi
+			done
+		 	FPATH=$(echo ${i} | cut -d"," -f1) \
+			FLAVOR=${FLAVOR} \
+			SUBPACKAGE=${SUBPACKAGE} \
+			${P2WDIR}/get-port ROW	
+			cd ${PORTSDIR}/${FPATH}
+		done
+		echo '</table>'
+	fi
+elif [ "${1}" == "RUN_DEPENDS" ]
+then
+        RUN_DEPENDS=$(echo ${RUN_DEPENDS} | tsort | sed -e '1D')
+        if [ -n "${RUN_DEPENDS}" ]
+        then
+                echo '<p class="ports-entry">'
+                echo '<span class="ports-entry-description">Runtime Dependencies</span>'
+                echo '</p>'
+                echo "<table class=\"ports-list\">"
+                echo '<tr class="ports-list-header">'
+                echo '<td class="ports-list-header">Name</td>'
+                echo '<td class="ports-list-header">Version</td>'
+                echo '<td class="ports-list-header">Comment</td>'
+                echo '</tr>'
+                for i in ${RUN_DEPENDS}
+                do
+                        SUBPACKAGE=""
+                        FLAVOR=""
+                        for j in $(echo ${i} | cut -d"," -s -f2- | sed -e 's/,/ /g')
+                        do
+                                if [ -n "$(echo ${j} | grep '^-')" ]
+                                then
+					if [ -n "${SUBPACKAGE}" ]
+					then
+                                        	SUBPACKAGE="${SUBPACKAGE} ${j}"
+					else
+						SUBPACKAGE=${j}
+					fi
+                                else
+					if [ -n "${FLAVOR}" ]
+					then
+						FLAVOR="${FLAVOR} ${j}"
+					else
+						FLAVOR=${j}
+					fi
+                                fi
+                        done
+                        FPATH=$(echo ${i} | cut -d"," -f1) \
+                        FLAVOR=${FLAVOR} \
+			SUBPACKAGE=${SUBPACKAGE} \
+                        ${P2WDIR}/get-port ROW
+			cd ${PORTSDIR}/${FPATH}
+                done
+                echo '</table>'
+        fi
+
+fi
+
+cd ${PORTSDIR}/${FPATH}

@@ -1,0 +1,104 @@
+#!/bin/sh
+
+# create port 
+
+P2WDIR=$(cat $ENVDIR/P2WDIR)
+
+. ${P2WDIR}/functions
+
+NAME=$(FPATH=${FPATH} SUBPACKAGE=${SUBPACKAGE} FLAVOR=${FLAVOR} ${P2WDIR}/get-port PKG)
+FILENAME=$(FPATH=${FPATH} SUBPACKAGE=${SUBPACKAGE} FLAVOR=${FLAVOR} ${P2WDIR}/get-port FILENAME)
+D="${BASE_OUTPUTDIR}/${RPATH}/${FILENAME}.wml"
+N=$(echo $RPATH | rev | cut -d"/" -f2- | rev)/${NAME}
+mkdir -p ${BASE_OUTPUTDIR}/${RPATH}
+cd ${BASE_INPUTDIR}/${RPATH}
+
+rm -f ${D} && touch ${D}
+
+echo '#include "template.inc"' >> ${D}
+blank ${D}
+echo "<divert TITLE>OpenBSD ports ${PORTSDIR_VERSION}: ${N}</divert>" >> ${D}
+echo '<divert BODY>' >> ${D}
+echo "<div class=\"link-path\">${LINK_PATH} :: ${NAME}</div>" >> ${D}
+echo "<h2>${NAME}</h2>" >> ${D}
+
+echo '<p class="ports-entry">' >> ${D}
+echo '<span class="ports-entry-description">Short description: </span>' >> ${D}
+echo "<span class=\"ports-entry-value\">" >> ${D}
+echo $(FPATH=${FPATH} SUBPACKAGE=${SUBPACKAGE} FLAVOR=${FLAVOR} ${P2WDIR}/get-port COMMENT) >> ${D}
+echo "</span>" >> ${D}
+echo "</p>" >> ${D}
+
+echo '<p class="ports-entry">' >> ${D}
+echo '<span class="ports-entry-description">Path: </span>' >> ${D}
+echo "<span class=\"ports-entry-value\">" >> ${D}
+echo ${RPATH} >> ${D}
+echo "</span>" >> ${D}
+echo "</p>" >> ${D}
+
+echo '<p class="ports-entry">' >> ${D}
+echo '<span class="ports-entry-description">Version: </span>' >> ${D}
+echo "<span class=\"ports-entry-value\">" >> ${D}
+echo $(FPATH=${FPATH} SUBPACKAGE=${SUBPACKAGE} FLAVOR=${FLAVOR} ${P2WDIR}/get-port VERSION) >> ${D}
+echo "</span>" >> ${D}
+echo "</p>" >> ${D}
+
+if [ -f "${BASE_INPUTDIR}/${RPATH}/pkg/NEW" ] || [ -f "${BASE_INPUTDIR}/${RPATH}/pkg/UPDATED" ]
+then
+	echo '<p class="ports-entry">' >> ${D}
+	echo '<span class="ports-entry-description"' >> ${D}
+if [ -f "${BASE_INPUTDIR}/${RPATH}/pkg/NEW" ]
+then
+	echo '<span class="ports-entry-description">New Port: </span>' >> ${D}
+	echo '<span class="ports-entry-value">' >> ${D}
+	cat ${BASE_INPUTDIR}/${RPATH}/pkg/NEW >> ${D}
+else
+        echo '<span class="ports-entry-description">Updated Port: </span>' >> ${D}
+        echo '<span class="ports-entry-value">' >> ${D}
+        cat ${BASE_INPUTDIR}/${RPATH}/pkg/UPDATED >> ${D}
+fi
+	echo '</span></p>' >> ${D}
+fi
+
+URL=$(FPATH=${FPATH} SUBPACKAGE=${SUBPACKAGE} FLAVOR=${FLAVOR} ${P2WDIR}/get-port URL)
+if [ -n "${URL}" ]
+then
+	echo '<p class="ports-entry">' >> ${D}
+	echo '<span class="ports-entry-description">Webpage: </span>' >> ${D}
+	echo "<span class=\"ports-entry-value\">" >> ${D}
+	echo "<url class\"ports-entry-value\">${URL}</url>" >> ${D}
+	echo "</span>" >> ${D}
+	echo "</p>" >> ${D}
+fi
+
+echo '<p class="ports-entry">' >> ${D}
+echo '<span class="ports-entry-description">Maintainer: </span>' >> ${D}
+echo "<span class=\"ports-entry-value\">" >> ${D}
+echo $(FPATH=${FPATH} SUBPACKAGE=${SUBPACKAGE} FLAVOR=${FLAVOR} ${P2WDIR}/get-port MAINTAINER) >> ${D}
+echo "</span>" >> ${D}
+echo "</p>" >> ${D}
+
+if [ "${TGZ}" == "1" ]
+then
+	D_TGZ="${BASE_OUTPUTDIR}/${RPATH}/${NAME}.tgz"
+	(cd ${BASE_INPUTDIR}/${RPATH} && tar -czf ${D_TGZ} $(find * -type f | grep -v CVS | grep -v .svn)) 
+	echo '<p class="ports-entry">' >> ${D}
+	echo '<span class="ports-entry-description">Download: </span>' >> ${D}
+	echo '<span class="ports-entry-value">' >> ${D}
+	echo "<a class=\"ports-entry-value\" href=\"${TREE_ROOTPATH}/${FPATH}/${NAME}.tgz\">get port</a>" >> ${D}
+	echo "</span>" >> ${D}
+	echo "</p>" >> ${D}
+fi
+
+echo '<p class="ports-entry">' >> ${D}
+echo '<span class="ports-entry-description">Description</span>' >> ${D}
+echo "</p>" >> ${D}
+echo "<pre class=\"ports-entry-value\">" >> ${D}
+cat $(FPATH=${FPATH} SUBPACKAGE=${SUBPACKAGE} FLAVOR=${FLAVOR} ${P2WDIR}/get-port DESCR | sed -e 's/&/&amp;/g') >> ${D}
+echo "</pre>" >> ${D}
+
+FPATH=${FPATH} SUBPACKAGE=${SUBPACKAGE} FLAVOR=${FLAVOR} ${P2WDIR}/get-port BUILD_DEPENDS >> ${D}
+
+FPATH=${FPATH} SUBPACKAGE=${SUBPACKAGE} FLAVOR=${FLAVOR} ${P2WDIR}/get-port RUN_DEPENDS >> ${D}
+
+echo '</divert>' >> ${D}

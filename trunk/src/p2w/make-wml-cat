@@ -1,0 +1,134 @@
+#!/bin/sh
+
+# create category
+
+P2WDIR=$(cat $ENVDIR/P2WDIR)
+
+. ${P2WDIR}/functions
+
+N=$(echo ${RPATH} | rev | cut -d"/" -f1 | rev)
+D="${BASE_OUTPUTDIR}/${RPATH}/index.wml"
+mkdir -p ${BASE_OUTPUTDIR}/${RPATH}
+cd ${BASE_INPUTDIR}/${RPATH}
+
+rm -f ${D} && touch ${D}
+
+echo '#include "template.inc"' >> ${D}
+blank ${D}
+if [ -z "${RPATH}" ] && [ -z "${LINK_PATH}" ]
+then
+	echo "<divert TITLE>OpenBSD ports ${PORTSDIR_VERSION}</divert>" >> ${D}
+	LINK_PATH="<a class=\"link-path\" href=\"${BASE_ROOTPATH}/index.html\">Home</a>" >> ${D}
+	echo '<divert BODY>' >> ${D}
+elif [ -n "${RPATH}" ] && [ -n "${LINK_PATH}" ]
+then
+	echo "<divert TITLE>OpenBSD ports ${PORTSDIR_VERSION}: ${RPATH}</divert>" >> ${D}
+	echo '<divert BODY>' >> ${D}
+        echo "<div class=\"link-path\">${LINK_PATH} :: ${N}</div>" >> ${D}
+        LINK_PATH="${LINK_PATH} :: <a href=\"${BASE_ROOTPATH}/${RPATH}/index.html\">${N}</a>"
+else
+	echo "ERROR: LINK_PATH and RPATH should both be empty OR both have a value"
+	exit 1
+fi
+
+if [ -n "${N}" ]
+then 
+	echo "<h2>${N}</h2>" >> ${D}
+else
+	echo "<h2>OpenBSD ports ${PORTSDIR_VERSION}</h2>" >> ${D}
+fi
+
+SUBDIRS=$(make show-subdirs)
+PORTS=""
+SUBCATS=""
+
+for i in ${SUBDIRS}
+do
+	NAME="" && FLAVOR=""
+	cd ${BASE_INPUTDIR}/${RPATH}
+	NAME=$(echo ${i} | cut -d"," -f1)
+	if [ -n "$(cd ${NAME} && make show-subdirs)" ]
+	then
+	  SUBCATS="${SUBCATS} <cell>"
+	  if [ -n "$RPATH" ]
+	  then
+	  SUBCATS="${SUBCATS} <a class=\"category-list\" href=\"${BASE_ROOTPATH}/${RPATH}/${NAME}/index.html\">${NAME}</a>"
+	  else
+		SUBCATS="${SUBCATS} <a class=\"category-list\" href=\"${BASE_ROOTPATH}/${NAME}/index.html\">${NAME}</a>"
+	  fi
+	  SUBCATS="${SUBCATS} </cell>\n"
+	  if [ -n "$RPATH" ]
+	  then
+		RPATH=${RPATH}/${NAME} LINK_PATH=${LINK_PATH} ${P2WDIR}/make-wml-cat
+	  else
+		RPATH=${NAME} LINK_PATH=${LINK_PATH} ${P2WDIR}/make-wml-cat
+	  fi
+	else
+	  FLAVOR=$(echo ${i} |  sed -e "s/${NAME}//" -e 's/^,//' -e 's/,/ /g')
+	  FPATH="$(make pkg-path)"
+          if [ -n "$RPATH" ]
+          then
+            NRPATH="${RPATH}/${NAME}"
+          else
+            NRPATH="${NAME}"
+          fi
+	 if [ -n "$FPATH" ]
+	then
+		FPATH=${FPATH}/${NAME}
+	else
+		FPATH=${NAME}
+	fi
+	  RPATH=${NRPATH} \
+	  LINK_PATH=${LINK_PATH} \
+	  FLAVOR=${FLAVOR} \
+	  FPATH=${FPATH} \
+	  ${P2WDIR}/make-wml-port
+	  PORTS="${PORTS} \
+	  $(RPATH=${NRPATH} FPATH=${FPATH} \
+		 FLAVOR=${FLAVOR} \
+		 ${P2WDIR}/get-port ROW)\\n"
+	  if [ -n "$FLAVOR" ]
+	  then
+		MULTI_PACKAGES="$(cd ${NAME} && FLAVOR=${FLAVOR} make show=MULTI_PACKAGES)"
+	  else
+		MULTI_PACKAGES="$(cd ${NAME} && make show=MULTI_PACKAGES)"
+	  fi
+	  for j in $MULTI_PACKAGES
+	  do
+		PORTS="${PORTS} \
+			$(RPATH=${NRPATH} FPATH=${FPATH} \
+			FLAVOR=${FLAVOR} \
+			SUBPACKAGE=${j} \
+			${P2WDIR}/get-port ROW)\\n" 
+	 	RPATH=${NRPATH} FPATH=${FPATH} LINK_PATH=${LINK_PATH} \
+		FLAVOR=${FLAVOR} SUBPACKAGE=${j} \
+		${P2WDIR}/make-wml-port
+
+  	  done
+	fi
+done
+
+if [ -n "${SUBCATS}" ]
+then
+	CELLS=$(($(echo $SUBCATS | grep '</cell>' | wc -l | sed -e 's/ //g')/2+1))
+	echo "<h3>Sub-categories</h3>" >> ${D}
+	echo "<grid class=\"category-list\" layout=\"2x${CELLS}\">" >> ${D}
+	echo ${SUBCATS} >> ${D}
+	echo "</grid>" >> ${D}
+fi
+
+if [ -n "${PORTS}" ]
+then
+	echo "<h3>Ports</h3>" >> ${D}
+	echo "<table class=\"ports-list\">" >> ${D}
+	echo '<tr class="ports-list-header">' >> ${D}
+	echo '<td class="ports-list-header">Name</td>' >> ${D}
+	echo '<td class="ports-list-header">Version</td>' >> ${D}
+	echo '<td class="ports-list-header">Comment</td>' >> ${D}
+	echo '</tr>' >> ${D}
+	echo ${PORTS} >> ${D}
+	echo "</table>" >> ${D}
+fi
+
+echo '</divert>' >> ${D}
+

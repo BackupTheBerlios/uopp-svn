@@ -1,0 +1,32 @@
+#!/bin/sh
+
+#########################################
+# Create WML files from ports tree
+#########################################
+
+ENVDIR=$(mktemp -d /tmp/p2w.envdir.XXXXXXXXX)
+
+echo "$PORTSDIR" > ${ENVDIR}/PORTSDIR
+echo "$PORTSDIR_PATH" > ${ENVDIR}/PORTSDIR_PATH
+echo "$PORTSDIR_VERSION" > ${ENVDIR}/PORTSDIR_VERSION
+echo "$BASE_INPUTDIR" > ${ENVDIR}/BASE_INPUTDIR
+echo "$BASE_OUTPUTDIR" > ${ENVDIR}/BASE_OUTPUTDIR
+echo "$BASE_ROOTPATH" > ${ENVDIR}/BASE_ROOTPATH
+echo "$TREE_ROOTPATH" > ${ENVDIR}/TREE_ROOTPATH
+echo "$P2WDIR" > ${ENVDIR}/P2WDIR
+echo "$TGZ" > ${ENVDIR}/TGZ
+
+. ${P2WDIR}/functions
+
+cd ${BASE_INPUTDIR} &&
+
+if [ -n "$(make show-subdirs)" ]
+then
+	ENVDIR=$ENVDIR \
+	${P2WDIR}/make-wml-cat
+else
+	ENVDIR=$ENVDIR \
+	${P2WDIR}/make-wml-port
+fi
+
+rm -rf ${ENVDIR} 
