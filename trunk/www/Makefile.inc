@@ -1,4 +1,4 @@
-TARGETS+=*.html *.wml *.gif *.png *.jpg *.jpeg *.pdf *.css
+TARGETS+=*.html *.wml *.gif *.png *.jpg *.jpeg *.pdf *.css *.tgz
 
 .SUFFIXES: .html .wml
 
@@ -14,7 +14,7 @@ _SUBDIRUSE: .USE
 		); \
 	done
 
-*.html *.css *.gif *.png *.jpg *.jpeg *.pdf: destdir
+*.html *.css *.gif *.png *.jpg *.jpeg *.pdf *.tgz: destdir
 	@cp -p ${.TARGET} ${DESTDIR}/${.TARGET}
 	@chmod 664 ${DESTDIR}/${.TARGET}
 
@@ -25,7 +25,15 @@ _SUBDIRUSE: .USE
 build: _SUBDIRUSE ${TARGETS}
 
 empty-indexes:
-	@(cd ${DESTDIR} && for i in $(find * -type d); do touch $i/index.html; done)
+	@(cd ${DESTDIR} && for i in $$(find * -type d); do touch $${i}/index.html; done)
+
+tidy:
+	@(cd ${DESTDIR} && for i in $$(find * -type f -name "*.html"); do \
+	/usr/local/lib/wml/exec/wml_aux_tidy -i -m -utf8 -quiet $${i} 2>&1; done)
+
+linklint:
+	@(cd ${DESTDIR} && /usr/local/lib/wml/exec/wml_aux_linklint \
+		-textonly -error -warn -silent /\@)
 
 clean:
 	@rm -rf ${DESTDIR}
@@ -33,7 +41,7 @@ clean:
 destdir:
 	@mkdir -p ${DESTDIR}
 
-upload:
+upload: tidy empty-indexes
 	@(cd ${DESTDIR} && chmod 644 $$(find * -type f) && chmod 755 $$(find * -type d) )
 	@rsync --recursive --links --times --delete --exclude=usage \
 		${DESTDIR}/ shell.berlios.de:/home/groups/uopp/htdocs/

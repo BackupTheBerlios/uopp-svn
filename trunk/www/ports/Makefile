@@ -11,16 +11,17 @@ update:
 	@(cd ${TOPDIR}/../ports/current/mystuff && svn update)
 
 #generate: ${RELEASES} current unofficial templates
-generate: clean current templates
+generate: clean unofficial templates
 
 ${RELEASES} current:
 	@mkdir -p ${.TARGET}
 	@(cd ${P2WDIR} && PORTSDIR=${TOPDIR}/../ports/${.TARGET} \
 		PORTSDIR_PATH=${TOPDIR}/../ports/${.TARGET} \
 		PORTSDIR_VERSION=${.TARGET} \
-		BASE_INPUTDIR=${TOPDIR}/../ports/${.TARGET}/archivers \
-		BASE_OUTPUTDIR=${TOPDIR}/ports/${.TARGET}/archivers \
-		BASE_ROOTPATH=/ports/${.TARGET}/archivers \
+		BASE_INPUTDIR=${TOPDIR}/../ports/${.TARGET} \
+		BASE_OUTPUTDIR=${TOPDIR}/ports/${.TARGET} \
+		BASE_ROOTPATH=/ports/${.TARGET} \
+		TREE_ROOTPATH=/ports/${.TARGET} \
 		P2WDIR=${P2WDIR} \
 		./make-wml) 
 
@@ -31,13 +32,17 @@ templates:
 	done
 
 unofficial:
-	@mkdir -p ${.TARGET}
-	@(cd ${TOPDIR}/../ports/current/mystuff && make \
-		PORTSDIR=`pwd`/.. \
-		PORTSDIR_PATH=${TOPDIR}/../ports/current/mystuff:${TOPDIR}/../ports/current \
-		PORTS_BRANCH=${.TARGET} \
-		WMLDIR=${TOPDIR}/ports/current/mystuff TGZ= wml)
-
+	@mkdir -p ${TOPDIR}/../ports/current/mystuff
+	@(cd ${P2WDIR} && PORTSDIR=${TOPDIR}/../ports/current \
+		PORTSDIR_PATH=${TOPDIR}/../ports/current/mystuff:${TOPDIR}../ports/current
+                PORTSDIR_VERSION=${.TARGET} \
+                BASE_INPUTDIR=${TOPDIR}/../ports/current/mystuff \
+                BASE_OUTPUTDIR=${TOPDIR}/ports/current/mystuff \
+                BASE_ROOTPATH=/ports/current/mystuff \
+                TREE_ROOTPATH=/ports/current \
+                TGZ=1 \
+                P2WDIR=${P2WDIR} \
+                ./make-wml)
 clean:
 	@rm -rf ${RELEASES} current
 
