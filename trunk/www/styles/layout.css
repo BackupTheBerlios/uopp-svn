@@ -40,8 +40,13 @@ td.logo {
  *********************/
 
 table.body {
- margin-left: 4px;
- margin-right: 4px;
+ padding-left: 4px;
+ padding-right: 4px;
+ width: 100%;
+}
+
+tr.body, td.body {
+ width: 100%
 }
 
 /**********************
@@ -57,15 +62,23 @@ td.category-list {
 }
 
 td.port-summary-pkg {
- width: 25%
+ width: 20%
 }
 
 td.port-summary-version {
- width: 25%
+ width: 15%
 }
 
 td.port-summary-comment {
- width: 50%
+ width: 65%
+}
+
+div.link-path {
+ padding: 4px;
+}
+
+p.ports-entry {
+ line-height: 50%;
 }
 
 /***********************
