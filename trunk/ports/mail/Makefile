@@ -1,7 +1,6 @@
 # $OpenBSD$
 
 SUBDIR+= dovecot
-SUBDIR+= dspam
 SUBDIR+= qmail
 SUBDIR+= qmailanalog
 
