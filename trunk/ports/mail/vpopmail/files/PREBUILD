@@ -56,5 +56,5 @@ create_user()
 }
 
 create_group vpopmail 2856
-create_user vpopmail 2856 2856 vpopmail /home/users/vpopmail $NOSHELL
+create_user vpopmail 2856 2856 vpopmail /var/vpopmail $NOSHELL
 exit 0

@@ -31,7 +31,7 @@ CONFIGURE_ARGS=		--enable-qmaildir=/var/qmail \
 			--enable-logging=p
 			
 INSTALL_TARGET=		install-strip
-PREFIX=			/home/users/vpopmail
+PREFIX=			/var/vpopmail
 
 pre-configure:
 	@${SUDO} ${SH} ${PKGDIR}/../files/PREBUILD
