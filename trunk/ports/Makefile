@@ -2,7 +2,6 @@
 
 SUBDIR += mail
 SUBDIR += net
-SUBDIR += security
 SUBDIR += sysutils
 SUBDIR += www
 
