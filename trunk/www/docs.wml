@@ -12,7 +12,7 @@
 <ul>
 <li>Download the tree: We'll use the /usr/ports/uopp dir here.
 <ul>
-	<li>Snapshot: Download the latest <a href="<get-var ROOT />/ports/uopp-snapshot.tgz">snapshot</a> and extract it in /usr/ports/</li>
+	<li>Snapshot: Download the latest <a href="/ports/uopp-snapshot.tgz">snapshot</a> and extract it in /usr/ports/</li>
 	<li>Subversion: Execute the following command: <kbd>cd /usr/ports; svn checkout svn://svn.berlios.de/uopp/trunk/ports uopp</kbd></li>
 </ul>
 </li>

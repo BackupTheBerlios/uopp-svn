@@ -14,7 +14,7 @@
 <li><a href="<get-var ROOT />/ports/3.5/index.html">Browsable interface of the 3.5 ports tree</a></li>
 <li><a href="<get-var ROOT />/ports/3.6/index.html">Browsable interface of the 3.6 ports tree</a></li>
 <li><a href="<get-var ROOT />/ports/current/index.html">Browsable interface of the current ports tree</a></li>
-<li><a href="<get-var ROOT />/ports/current/mystuff/index.html">Downloadable unofficial OpenBSD ports</a></li>
+<li><a href="<get-var ROOT />/ports/current/uopp/index.html">Downloadable unofficial OpenBSD ports</a></li>
 </ul>
 </divert>
 
@@ -29,10 +29,10 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <title><dump TITLE /> | uopp</title>
-  <link rel="stylesheet" type="text/css" href="<get-var ROOT />/styles/layout.css" media="screen" />
-  <link rel="shortcut icon" href="<get-var ROOT />/images/puf100X86.gif" />
+  <link rel="stylesheet" type="text/css" href="/styles/layout.css" media="screen" />
+  <link rel="shortcut icon" href="/images/puf100X86.gif" />
   <style type="text/css">
-    @import "<get-var ROOT />/styles/markup.css";
+    @import "/styles/markup.css";
   </style>
 </head>
 
@@ -41,16 +41,16 @@
 <table class="header">
 	<tr class="header">
    <td class="logo">
-   	<img class="logo" width="200" height="50" alt="OpenBSD logo" src="<get-var ROOT />/images/puflogh200X50.gif" />
+   	<img class="logo" width="200" height="50" alt="OpenBSD logo" src="/images/puflogh200X50.gif" />
 	</td>
    <td class="menu">
       <div class="menu">
-	<a class="menu_item" href="<get-var ROOT />/index.html">Home</a> | 
-	<a class="menu_item" href="<get-var ROOT />/ports.html">Ports</a> |
-	<a class="menu_item" href="<get-var ROOT />/docs.html">Documentation</a> | 
-	<a class="menu_item" href="<get-var ROOT />/code.html">Code</a> | 
-	<a class="menu_item" href="<get-var ROOT />/links.html">Links</a> | 
-	<a class="menu_item" href="<get-var ROOT />/about.html">About</a></div>
+	<a class="menu_item" href="/index.html">Home</a> | 
+	<a class="menu_item" href="/ports.html">Ports</a> |
+	<a class="menu_item" href="/docs.html">Documentation</a> | 
+	<a class="menu_item" href="/code.html">Code</a> | 
+	<a class="menu_item" href="/links.html">Links</a> | 
+	<a class="menu_item" href="/about.html">About</a></div>
    </td>
    </tr>
 </table>
