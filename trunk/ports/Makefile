@@ -1,6 +1,6 @@
 # $OpenBSD$
 
-SUBDIR += databases
+#SUBDIR += databases
 SUBDIR += devel
 SUBDIR += editors 
 SUBDIR += mail
