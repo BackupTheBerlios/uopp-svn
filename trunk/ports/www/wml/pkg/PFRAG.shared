@@ -1,0 +1,5 @@
+@comment $OpenBSD$
+lib/wml/perl/lib/${MACHINE_ARCH}-openbsd/auto/Bit/Vector/Vector.so
+lib/wml/perl/lib/${MACHINE_ARCH}-openbsd/auto/IO/IO.so
+lib/wml/perl/lib/${MACHINE_ARCH}-openbsd/auto/Term/ReadKey/ReadKey.so
+lib/wml/perl/lib/${MACHINE_ARCH}-openbsd/auto/WML/GD/GD.so
