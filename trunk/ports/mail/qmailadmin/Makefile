@@ -22,7 +22,8 @@ CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS=		--enable-htmldir=/var/www/htdocs  \
 			--disable-ezmlm-mysql \
 			--enable-modify-quota \
-			--enable-vpopgroup=vpopmail
+			--enable-vpopgroup=vpopmail \
+			--enable-vpopmaildir=/var/vpopmail
 	
 INSTALL_TARGET=		install-strip
 
