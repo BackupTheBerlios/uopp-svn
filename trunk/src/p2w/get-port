@@ -59,7 +59,7 @@ fi
 
 for i in ${LIST} 
 do
-	if [ -n "$(echo ${i} | grep ^[0-9])" ]
+	if [ -n "$(echo ${i} | grep ^[0-9])" ] && [ -n "${PKG}" ]
 	then
 		IN_VERSION="true"
 	fi
