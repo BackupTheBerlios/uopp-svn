@@ -1,7 +1,6 @@
 # $OpenBSD$
 
-SUBDIR += devel
-SUBDIR += editors 
+SUBDIR += subversion 
 
 .include <bsd.port.subdir.mk>
 
