@@ -18,8 +18,10 @@ MASTER_SITES=		http://savannah.nongnu.org/download/mailnotify/
 
 MODULES=		gettext 
 BUILD_DEPENDS+=         :pkgconfig-*:devel/pkgconfig \
-			:scrollkeeper-*:textproc/scrollkeeper
-RUN_DEPENDS+=		:scrollkeeper-*:textproc/scrollkeeper
+			:scrollkeeper-*:textproc/scrollkeeper \
+			:p5-XML-Parser-*:textproc/p5-XML-Parser
+RUN_DEPENDS+=		:scrollkeeper-*:textproc/scrollkeeper \
+			:hicolor-icon-theme-*:x11/hicolor-icon-theme
 LIB_DEPENDS+=		eel-2::x11/gnome/eel
 USE_X11=		Yes
 USE_GMAKE=		Yes
@@ -34,36 +36,8 @@ CONFIGURE_ENV+=		CPPFLAGS="${CPPFLAGS}" LDFLAGS="${LDFLAGS}"
 CONFDIR=		${SYSCONFDIR}/gnome
 SUBST_VARS=		CONFDIR
 
-FLAVORS=		no_mbox no_mh no_maildir no_sylpheed no_pop3 gmail no_imap sasl no_ssl
+FLAVORS=		gmail sasl
 FLAVOR?=
-
-.if ${FLAVOR:L:Mno_mbox}
-CONFIGURE_ARGS+=	--disable-mbox
-.endif
-
-.if ${FLAVOR:L:Mno_mh}
-CONFIGURE_ARGS+=	--disable-mh
-.endif
-
-.if ${FLAVOR:L:Mno_maildir}
-CONFIGURE_ARGS+=        --disable-maildir
-.endif
-
-.if ${FLAVOR:L:Mno_sylpheed}
-CONFIGURE_ARGS+=        --disable-sylpheed
-.endif
-
-.if ${FLAVOR:L:Mno_pop3}
-CONFIGURE_ARGS+=        --disable-pop3
-.endif
-
-.if ${FLAVOR:L:Mno_ssl}
-CONFIGURE_ARGS+=	--disable-ssl
-.endif
-
-.if ${FLAVOR:L:Mno_imap}
-CONFIGURE_ARGS+=	--disable-imap
-.endif
 
 .if ${FLAVOR:L:Msasl}
 CONFIGURE_ARGS+=	--enable-sasl
