@@ -3,8 +3,8 @@
 ##
 
 #include "grid.inc"
+#include "isolatin.inc"
 
-#use wml::fmt::isolatin
 #use wml::std::tags
 #use wml::fmt::url
 
