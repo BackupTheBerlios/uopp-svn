@@ -1,0 +1,37 @@
+$OpenBSD$
+--- src/auth/passdb-passwd.c.orig	2003-05-18 14:26:28.000000000 +0200
++++ src/auth/passdb-passwd.c	2004-08-21 07:22:02.000000000 +0200
+@@ -10,6 +10,9 @@
+ #include "passdb.h"
+ #include "mycrypt.h"
+ 
++#include <login_cap.h>
++#include <bsd_auth.h>
++
+ #include <pwd.h>
+ 
+ static void
+@@ -27,22 +30,10 @@ passwd_verify_plain(struct auth_request 
+ 		return;
+ 	}
+ 
+-	if (!IS_VALID_PASSWD(pw->pw_passwd)) {
+-		if (verbose) {
+-			i_info("passwd(%s): invalid password field '%s'",
+-			       request->user, pw->pw_passwd);
+-		}
+-		callback(PASSDB_RESULT_USER_DISABLED, request);
+-		return;
+-	}
+-
+-	/* check if the password is valid */
+-	result = strcmp(mycrypt(password, pw->pw_passwd), pw->pw_passwd) == 0;
+-
+ 	/* clear the passwords from memory */
+ 	safe_memset(pw->pw_passwd, 0, strlen(pw->pw_passwd));
+ 
+-	if (!result) {
++	if (auth_userokay(request->user,NULL,NULL,password) == 0) {
+ 		if (verbose)
+ 			i_info("passwd(%s): password mismatch", request->user);
+ 		callback(PASSDB_RESULT_PASSWORD_MISMATCH, request);

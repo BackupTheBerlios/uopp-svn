@@ -1,0 +1,34 @@
+@comment $OpenBSD: PLIST,v 1.8 2005/02/12 12:17:07 brad Exp $
+@newgroup _dovecot:518
+@newuser _dovecot:518:_dovecot:daemon:Dovecot Account:/nonexistent:/sbin/nologin
+libexec/dovecot/
+libexec/dovecot/dovecot-auth
+libexec/dovecot/imap
+libexec/dovecot/imap-login
+libexec/dovecot/pop3
+libexec/dovecot/pop3-login
+sbin/dovecot
+sbin/dovecot-mkcert.sh
+share/doc/dovecot/
+share/doc/dovecot/USE-WIKI-INSTEAD
+share/doc/dovecot/auth.txt
+share/doc/dovecot/configuration.txt
+share/doc/dovecot/design.txt
+share/doc/dovecot/index.txt
+share/doc/dovecot/mail-storages.txt
+share/doc/dovecot/multiaccess.txt
+share/doc/dovecot/nfs.txt
+share/doc/dovecot/securecoding.txt
+share/examples/dovecot/
+share/examples/dovecot/dovecot-example.conf
+@sample ${SYSCONFDIR}/dovecot.conf
+share/examples/dovecot/dovecot-openssl.cnf
+@sample ${SYSCONFDIR}/ssl/dovecot-openssl.cnf
+@mode 700
+@sample /var/dovecot/
+@mode 750
+@group _dovecot
+@sample /var/dovecot/login/
+@extra ${SYSCONFDIR}/ssl/dovecotcert.pem
+@extra ${SYSCONFDIR}/ssl/private/dovecot.pem
+@extraunexec rm -rf /var/dovecot
