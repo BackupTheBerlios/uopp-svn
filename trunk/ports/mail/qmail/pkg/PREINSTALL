@@ -1,0 +1,78 @@
+#!/bin/sh
+# $OpenBSD$
+#
+# Written by Camiel Dobbelaar <cd@sentia.nl>, 2000
+# This file is in the public domain.
+
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
+QMAILDIR=/var/qmail
+NOSHELL=/sbin/nologin
+
+QMAILGID=2850
+NOFILESGID=32750
+ALIASUID=2849
+QMAILDUID=2850
+QMAILLUID=2851
+QMAILPUID=2852
+QMAILQUID=2853
+QMAILRUID=2854
+QMAILSUID=2855
+
+create_group()
+{
+        GROUP=$1
+        GID=$2
+
+        echo -n "Checking group '$GROUP' with gid '$GID': "
+
+	groupinfo -e $GROUP && {
+               	echo "OK, group already exists, but gid not checked." >&2
+               	return
+	}
+	groupinfo -e $GID && {
+                echo "ERR, gid taken." >&2
+                exit 1
+	}
+	echo -n "group does not exist. Create? "
+	groupadd -g $GID $GROUP || {
+                echo "ERR, cannot append to /etc/group" >&2
+                exit 1
+	}
+        echo "OK, created succesfully." >&2
+        return
+}
+
+create_user()
+{
+        NAME=$1;  UID=$2;  GID=$3
+        GECOS=$4; HOME=$5; SHELL=$6
+        
+        echo -n "Checking user '$NAME' with uid '$UID': "
+       
+	userinfo -e $NAME && {
+                echo "OK, user already exists, but uid not checked." >&2
+                return
+	}
+	userinfo -e $UID && {
+                echo "ERR, uid taken." >&2
+                exit 1
+	}
+	echo -n "user does not exist. Create? "
+        useradd -c $GECOS -d $HOME -g $GID -s $SHELL -u $UID $NAME || {
+                echo "ERR, cannot add user to database" >&2
+                exit 1
+	}
+        echo "OK, created successfully." >&2
+        return
+}
+
+create_group qmail   $QMAILGID
+create_group nofiles $NOFILESGID
+create_user alias  $ALIASUID  $NOFILESGID qmail $QMAILDIR/alias $NOSHELL
+create_user qmaild $QMAILDUID $NOFILESGID qmail $QMAILDIR       $NOSHELL
+create_user qmaill $QMAILLUID $NOFILESGID qmail $QMAILDIR       $NOSHELL
+create_user qmailp $QMAILPUID $NOFILESGID qmail $QMAILDIR       $NOSHELL
+create_user qmailq $QMAILQUID $QMAILGID   qmail $QMAILDIR       $NOSHELL
+create_user qmailr $QMAILRUID $QMAILGID   qmail $QMAILDIR       $NOSHELL
+create_user qmails $QMAILSUID $QMAILGID   qmail $QMAILDIR       $NOSHELL
+exit 0

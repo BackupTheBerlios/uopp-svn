@@ -1,0 +1,21 @@
+$OpenBSD$
+--- Makefile.orig	1998-08-30 15:39:26.000000000 -0600
++++ Makefile	2004-09-06 13:35:11.000000000 -0600
+@@ -68,7 +68,7 @@ compile case_lowers.c case.h
+ 	./compile case_lowers.c
+ 
+ check: \
+-it instcheck
++instcheck
+ 	./instcheck
+ 
+ columnt: \
+@@ -321,7 +321,7 @@ warn-auto.sh senders.sh conf-home
+ 	chmod 755 senders
+ 
+ setup: \
+-it install
++install
+ 	./install
+ 
+ slurpclose.o: \

@@ -1,0 +1,59 @@
+$OpenBSD$
+--- hier_queue.c.orig	2004-09-06 13:31:52.000000000 -0600
++++ hier_queue.c	2004-09-06 13:31:52.000000000 -0600
+@@ -0,0 +1,55 @@
++#include "auto_qmail.h"
++#include "auto_split.h"
++#include "auto_uids.h"
++#include "fmt.h"
++#include "fifo.h"
++
++char buf[100 + FMT_ULONG];
++
++void dsplit(base,uid,mode)
++char *base; /* must be under 100 bytes */
++int uid;
++int mode;
++{
++  char *x;
++  unsigned long i;
++
++  d(auto_qmail,base,uid,auto_gidq,mode);
++
++  for (i = 0;i < auto_split;++i) {
++    x = buf;
++    x += fmt_str(x,base);
++    x += fmt_str(x,"/");
++    x += fmt_ulong(x,i);
++    *x = 0;
++
++    d(auto_qmail,buf,uid,auto_gidq,mode);
++  }
++}
++
++void hier()
++{
++  h(auto_qmail,auto_uido,auto_gidq,0755);
++
++  d(auto_qmail,"control",auto_uido,auto_gidq,0755);
++  d(auto_qmail,"users",auto_uido,auto_gidq,0755);
++
++  d(auto_qmail,"alias",auto_uida,auto_gidq,02755);
++
++  d(auto_qmail,"queue",auto_uidq,auto_gidq,0750);
++  d(auto_qmail,"queue/pid",auto_uidq,auto_gidq,0700);
++  d(auto_qmail,"queue/intd",auto_uidq,auto_gidq,0700);
++  d(auto_qmail,"queue/todo",auto_uidq,auto_gidq,0750);
++  d(auto_qmail,"queue/bounce",auto_uids,auto_gidq,0700);
++
++  dsplit("queue/mess",auto_uidq,0750);
++  dsplit("queue/info",auto_uids,0700);
++  dsplit("queue/local",auto_uids,0700);
++  dsplit("queue/remote",auto_uids,0700);
++
++  d(auto_qmail,"queue/lock",auto_uidq,auto_gidq,0750);
++  z(auto_qmail,"queue/lock/tcpto",1024,auto_uidr,auto_gidq,0644);
++  z(auto_qmail,"queue/lock/sendmutex",0,auto_uids,auto_gidq,0600);
++  p(auto_qmail,"queue/lock/trigger",auto_uids,auto_gidq,0622);
++
++}
