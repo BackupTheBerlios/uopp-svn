@@ -1,4 +1,4 @@
-COMMENT=		"Easy virtual domain and authentication package for use with qmail"
+COMMENT=		"simple autoresponder for use in dot qmail files"
 
 DISTNAME=		autorespond-2.0.4
 CATEGORIES=		mail
