@@ -94,7 +94,8 @@ echo '<p class="ports-entry">' >> ${D}
 echo '<span class="ports-entry-description">Description</span>' >> ${D}
 echo "</p>" >> ${D}
 echo "<pre class=\"ports-entry-value\"><protect>" >> ${D}
-cat $(FPATH=${FPATH} SUBPACKAGE=${SUBPACKAGE} FLAVOR=${FLAVOR} ${P2WDIR}/get-port DESCR | sed -e 's/&/&amp;/g') >> ${D}
+DFILE=$(FPATH=${FPATH} SUBPACKAGE=${SUBPACKAGE} FLAVOR=${FLAVOR} ${P2WDIR}/get-port DESCR)
+cat $DFILE | sed -e 's/&/\&amp;/g' -e 's/>/\&gt;/g' -e 's/</\&lt;/g' >> ${D}
 echo "</protect></pre>" >> ${D}
 
 FPATH=${FPATH} SUBPACKAGE=${SUBPACKAGE} FLAVOR=${FLAVOR} ${P2WDIR}/get-port BUILD_DEPENDS >> ${D}

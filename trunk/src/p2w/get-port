@@ -10,6 +10,8 @@ IFS="-"
 PKG=""
 VERSION=""
 
+# -e 's/&/\&amp;/g' -e 's/>/\&gt;/g' -e 's/</\&lt;/g'
+
 #echo "NAME: $FPATH, FLAVOR=$FLAVOR, SUBPACKAGE=${SUBPACKAGE}E" > /dev/stderr
 
 if [ -n "$FLAVOR" ]
@@ -79,8 +81,7 @@ do
 	fi
 done
 
-COMMENT=$(echo $COMMENT | sed -e 's|^"||' -e 's|"$||' -e "s|^'||" -e "s|'$||" \
-	-e 's/&/\&amp;/g' -e 's/>/\&gt;/g' -e 's/</\&lt;/g')
+COMMENT=$(echo $COMMENT | sed -e 's|^"||' -e 's|"$||' -e "s|^'||" -e "s|'$||" -e 's/&/\&amp;/g' -e 's/>/\&gt;/g' -e 's/</\&lt;/g')
 
 IFS="${OLD_IFS}"
 
