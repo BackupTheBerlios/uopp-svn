@@ -1,3 +1,0 @@
-update to latest version
-
-*.desktop files (compose/mail/mozilla)
