@@ -1,9 +1,12 @@
+# $OpenBSD$
+# Original from: Michael Paddon <michael@paddon.org>
+
 COMMENT=		"Subversion revision control system"
 DISTNAME=		subversion-1.0.7
 CATEGORIES=		devel
 
 HOMEPAGE=		http://subversion.tigris.org/
-MAINTAINER=		Michael Paddon <michael@paddon.org>
+MAINTAINER=		Thomas Delaet <thomas@delaet.org>	
 
 PERMIT_PACKAGE_CDROM=	Yes
 PERMIT_PACKAGE_FTP=	Yes
