@@ -3,7 +3,7 @@
 COMMENT= 	"compact IMAP/POP3 server"
 
 DISTNAME=	dovecot-0.99.14
-PKGNAME=	${DISTNAME}p0
+PKGNAME=	${DISTNAME}p1
 CATEGORIES=	mail
 MASTER_SITES=	${HOMEPAGE}releases/
 
