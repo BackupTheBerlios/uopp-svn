@@ -1,0 +1,2 @@
+The version in the main ports tree (2.1.7p1) is marked as broken because of security problems.
+I updated the ports-tree version to the latest release. Important notice: I didn't update the various patches that replace the sprintf/strcat/strcpy calls with their more secure alternatives. These patches are present in the main ports tree.
