@@ -12,3 +12,4 @@ update mail-notification (gmime & gob2 ports)
 libcroco
 dspam
 run bulk lib-depends-check & marc espies script
+slow gdm-startup: gdm_slave_usr2_handler :0 got USR2 signal; 50 sec; gdm_slave_wait_for_login: In loop

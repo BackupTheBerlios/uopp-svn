@@ -1,7 +1,0 @@
-# $OpenBSD$
-
-SUBDIR += epiphany
-SUBDIR += gdm
-
-.include <bsd.port.subdir.mk>
-

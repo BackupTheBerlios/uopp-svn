@@ -1,2 +1,0 @@
-check ssl
-check crashes
