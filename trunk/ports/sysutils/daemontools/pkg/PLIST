@@ -1,0 +1,18 @@
+@comment $OpenBSD$
+bin/envdir
+bin/envuidgid
+bin/fghack
+bin/multilog
+bin/pgrphack
+bin/readproctitle
+bin/setlock
+bin/setuidgid
+bin/softlimit
+bin/supervise
+bin/svc
+bin/svok
+bin/svscan
+bin/svscanboot
+bin/svstat
+bin/tai64n
+bin/tai64nlocal
