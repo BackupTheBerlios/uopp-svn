@@ -1,0 +1,14 @@
+create ports for
+	- revelation
+	- file-roller
+	- eiffelstudio
+add bsd_auth to xscreensaver
+check problem with trash icon (nautilus)
+libgnomeprint: add support for bsd lpd & printcap
+check gconftool syntax when importing schemas
+gconftool --install-schema-file
+glib error: cannot register existing type
+update mail-notification (gmime & gob2 ports)
+libcroco
+dspam
+run bulk lib-depends-check & marc espies script

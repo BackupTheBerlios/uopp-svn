@@ -2,7 +2,7 @@
 
 COMMENT=		"Extremely scalable, statistical-hybrid anti-spam filter"
 
-DISTNAME=	 	dspam-3.2.2
+DISTNAME=	 	dspam-3.2.3
 CATEGORIES=		mail
 
 HOMEPAGE=		http://www.nuclearelephant.com/projects/dspam/	
@@ -18,9 +18,10 @@ PERMIT_DISTFILES_FTP=	Yes
 MASTER_SITES=		http://dspam.nuclearelephant.com/sources/ \
 			http://dspam.irontec.com/sources/	
 
-#BUILD_DEPENDS=		???
-#RUN_DEPENDS=		???
 LIB_DEPENDS=		sqlite.8::databases/sqlite
+
+CONFIGURE_STYLE=	gnu
+SEPARATE_BUILD=		concurrent
 
 CONFIGURE_STYLE=	gnu	
 CONFIGURE_ARGS+=	${CONFIGURE_SHARED} \
@@ -28,7 +29,9 @@ CONFIGURE_ARGS+=	${CONFIGURE_SHARED} \
 			--with-dspam-home=/var/dspam \
 			--with-sqlite-includes=/usr/local/include \
 			--with-sqlite-libraries=/usr/local/lib \
-			--with-dspam-group=wheel
+			--with-dspam-owner=root \
+			--with-dspam-group=wheel \
+			--with-dspam-mode=4555
 		
 post-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/share/examples/dspam

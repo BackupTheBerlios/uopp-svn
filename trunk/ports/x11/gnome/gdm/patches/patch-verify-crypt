@@ -1,0 +1,56 @@
+--- daemon/verify-crypt.c.orig	Thu Jul  8 08:59:13 2004
++++ daemon/verify-crypt.c	Thu Jul  8 09:02:41 2004
+@@ -25,10 +25,8 @@
+ #include <sys/types.h>
+ #include <unistd.h>
+ 
+-#ifdef HAVE_CRYPT
+-#  include <crypt.h>
+-#endif /* HAVE_CRYPT */
+-
++#include <login_cap.h>
++#include <bsd_auth.h>
+ #include <vicious.h>
+ 
+ #include "gdm.h"
+@@ -144,12 +142,6 @@
+         
+     ppasswd = (pwent == NULL) ? NULL : g_strdup (pwent->pw_passwd);
+     
+-    /* Request the user's password */
+-    if (pwent != NULL &&
+-        ve_string_empty (ppasswd)) {
+-	    /* eeek a passwordless account */
+-	    passwd = g_strdup ("");
+-    } else {
+ 	    passwd = gdm_slave_greeter_ctl (GDM_NOECHO, _("Password:"));
+ 	    if (passwd == NULL)
+ 		    passwd = g_strdup ("");
+@@ -161,26 +153,10 @@
+ 		    g_free (ppasswd);
+ 		    return NULL;
+ 	    }
+-    }
+ 
+     if (local)
+ 	    gdm_slave_greeter_ctl_no_ret (GDM_STOPTIMER, "");
+-
+-    if (pwent == NULL) {
+-	    gdm_sleep_no_signal (GdmRetryDelay);
+-	    gdm_error (_("Couldn't authenticate user \"%s\""), login);
+-
+-	    print_cant_auth_errbox ();
+-
+-	    g_free (login);
+-	    g_free (passwd);
+-	    g_free (ppasswd);
+-	    return NULL;
+-    }
+-
+-    /* Check whether password is valid */
+-    if (ppasswd == NULL || (ppasswd[0] != '\0' &&
+-			    strcmp (crypt (passwd, ppasswd), ppasswd) != 0)) {
++	if(auth_userokay(login,NULL,NULL,passwd) == 0) {
+ 	    gdm_sleep_no_signal (GdmRetryDelay);
+ 	    gdm_error (_("Couldn't authenticate user \"%s\""), login);
+ 

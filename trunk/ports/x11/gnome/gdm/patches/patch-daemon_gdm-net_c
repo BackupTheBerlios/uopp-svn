@@ -1,0 +1,12 @@
+$OpenBSD: patch-daemon_gdm-net_c,v 1.3 2004/06/24 23:58:34 marcm Exp $
+--- daemon/gdm-net.c.orig	Fri Dec 19 13:12:07 2003
++++ daemon/gdm-net.c	Thu Jun 24 10:21:59 2004
+@@ -390,7 +390,7 @@ gdm_connection_open_fifo (const char *fi
+ 		return NULL;
+ 	}
+ 
+-	fd = open (fifo, O_RDWR); /* Open with write to avoid EOF */
++	fd = open (fifo, O_NONBLOCK|O_RDONLY);
+ 
+ 	if G_UNLIKELY (fd < 0) {
+ 		gdm_error (_("%s: Could not open FIFO"),

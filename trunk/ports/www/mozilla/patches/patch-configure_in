@@ -1,0 +1,14 @@
+$OpenBSD$
+--- configure.in.orig	2004-05-25 20:25:16.000000000 -0600
++++ configure.in	2004-10-03 05:27:24.000000000 -0600
+@@ -727,7 +727,9 @@ dnl ====================================
+ if test "$GNU_CC"; then
+     MKSHLIB='$(CXX) $(CXXFLAGS) $(DSO_PIC_CFLAGS) $(DSO_LDOPTS) -o $@'
+     MKCSHLIB='$(CC) $(CFLAGS) $(DSO_PIC_CFLAGS) $(DSO_LDOPTS) -o $@'
+-    DSO_LDOPTS='-shared -Wl,-h -Wl,$@'
++    MKSHLIB_FORCE_ALL=''
++    MKSHLIB_UNFORCE_ALL=''
++    DSO_LDOPTS='-shared -fPIC'
+     DSO_CFLAGS=''
+     DSO_PIC_CFLAGS='-fPIC'
+     _MOZ_RTTI_FLAGS_ON=${_COMPILER_PREFIX}-frtti

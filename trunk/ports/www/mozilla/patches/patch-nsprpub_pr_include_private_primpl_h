@@ -1,0 +1,11 @@
+$OpenBSD$
+--- nsprpub/pr/include/private/primpl.h.orig	2004-04-14 14:36:59.000000000 -0600
++++ nsprpub/pr/include/private/primpl.h	2004-10-03 05:27:24.000000000 -0600
+@@ -1861,6 +1861,7 @@ extern void _PR_DestroyZones(void);
+         && !defined(DARWIN) \
+         && !defined(NEXTSTEP) \
+         && !defined(QNX) \
++        && !defined(__OpenBSD__) \
+         && !(defined (UNIXWARE) && defined (USE_SVR4_THREADS))
+ #define _PR_OVERRIDE_MALLOC
+ #endif

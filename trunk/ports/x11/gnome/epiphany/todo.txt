@@ -1,0 +1,2 @@
+check ssl
+check crashes

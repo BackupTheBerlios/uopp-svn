@@ -1,0 +1,12 @@
+$OpenBSD$
+--- directory/c-sdk/config/rules.mk.orig	2003-03-25 06:57:33.000000000 -0700
++++ directory/c-sdk/config/rules.mk	2004-10-03 05:27:24.000000000 -0600
+@@ -225,7 +225,7 @@ ifdef RELEASE_HEADERS
+ 	$(NSINSTALL) -t -m 0644 $(RELEASE_HEADERS) $(DESTDIR)$(includedir)
+ endif
+ ifdef RELEASE_LIBS
+-	$(NSINSTALL) -t -m 0755 $(RELEASE_LIBS) $(DESTDIR)$(libdir)
++	$(NSINSTALL) -t -m 0444 $(RELEASE_LIBS) $(DESTDIR)$(libdir)
+ endif
+ 	+$(LOOP_OVER_DIRS)
+ 

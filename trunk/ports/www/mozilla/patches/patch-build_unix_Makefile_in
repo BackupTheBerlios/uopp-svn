@@ -1,0 +1,21 @@
+$OpenBSD$
+--- build/unix/Makefile.in.orig	2004-02-24 20:27:10.000000000 -0700
++++ build/unix/Makefile.in	2004-10-03 05:27:24.000000000 -0600
+@@ -58,7 +58,7 @@ $(MOZ_APP_NAME)-config:: mozilla-config.
+ 	-e "s|%prefix%|$(prefix)|" \
+ 	-e "s|%exec_prefix%|$(exec_prefix)|" \
+ 	-e "s|%includedir%|$(includedir)|" \
+-	-e "s|%libdir%|$(mozappdir)|" \
++	-e "s|%libdir%|$(libdir)|" \
+ 	-e "s|%idldir%|$(idldir)|" \
+ 	-e "s|%MOZILLA_VERSION%|$(MOZ_APP_VERSION)|" \
+ 	-e "s|%DEFS%|$(_DEFS)|" \
+@@ -70,7 +70,7 @@ $(MOZ_APP_NAME)-%.pc : mozilla-%.pc.in M
+ 	-e "s|%prefix%|$(prefix)|" \
+ 	-e "s|%exec_prefix%|$(exec_prefix)|" \
+ 	-e "s|%includedir%|$(includedir)|" \
+-	-e "s|%libdir%|$(mozappdir)|" \
++	-e "s|%libdir%|$(libdir)|" \
+ 	-e "s|%MOZILLA_VERSION%|$(MOZ_APP_VERSION)|" \
+ 	-e "s|%SUPERWIN_LIBS%|$(SUPERWIN_LIBS)|" \
+ 	-e "s|%DEFS%|$(_DEFS)|" \

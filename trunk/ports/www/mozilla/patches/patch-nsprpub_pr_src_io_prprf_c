@@ -1,0 +1,13 @@
+$OpenBSD$
+--- nsprpub/pr/src/io/prprf.c.orig	2004-03-08 20:18:19.000000000 -0700
++++ nsprpub/pr/src/io/prprf.c	2004-10-03 05:50:57.000000000 -0600
+@@ -51,6 +51,9 @@
+ ** Note: on some platforms va_list is defined as an array,
+ ** and requires array notation.
+ */
++#if defined(va_copy)
++#define VARARGS_ASSIGN(foo, bar) __va_copy((foo),(bar))
++#endif
+ #if (defined(LINUX) && defined(__x86_64__))
+ #define VARARGS_ASSIGN(foo, bar) __va_copy((foo), (bar))
+ #elif (defined(LINUX) && defined(__powerpc__)) || \

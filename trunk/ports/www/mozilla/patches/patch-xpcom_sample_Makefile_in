@@ -1,0 +1,12 @@
+$OpenBSD$
+--- xpcom/sample/Makefile.in.orig	2004-02-18 19:43:46.000000000 -0700
++++ xpcom/sample/Makefile.in	2004-10-03 05:27:25.000000000 -0600
+@@ -52,7 +52,7 @@ XPIDLSRCS	= nsISample.idl
+ 
+ TESTCPPSRCS	= nsTestSample.cpp
+ 
+-CPPSRCS		+= $(TESTCPPSRCS)
++#CPPSRCS		+= $(TESTCPPSRCS)
+ 
+ SIMPLE_PROGRAMS	= $(TESTCPPSRCS:.cpp=$(BIN_SUFFIX))
+ 

@@ -1,0 +1,14 @@
+$OpenBSD: patch-gui_greeter_greeter_c,v 1.3 2004/06/24 23:58:34 marcm Exp $
+--- gui/greeter/greeter.c.orig	Tue Jun  1 12:08:07 2004
++++ gui/greeter/greeter.c	Thu Jun 24 10:21:59 2004
+@@ -1264,8 +1264,8 @@ main (int argc, char *argv[])
+     
+       gtk_dialog_run (GTK_DIALOG (dialog));
+ 
+-      execl (EXPANDED_BINDIR "/gdmlogin", EXPANDED_BINDIR "/gdmlogin", NULL);
+-      execlp ("gdmlogin", "gdmlogin", NULL);
++      execl (EXPANDED_BINDIR "/gdmlogin", EXPANDED_BINDIR "/gdmlogin", (void *)NULL);
++      execlp ("gdmlogin", "gdmlogin", (void *)NULL);
+ 
+       dialog = ve_hig_dialog_new (NULL /* parent */,
+ 				  GTK_DIALOG_MODAL /* flags */,

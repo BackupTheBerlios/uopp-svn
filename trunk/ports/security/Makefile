@@ -1,7 +1,6 @@
 # $OpenBSD$
 
-SUBDIR += epiphany
-SUBDIR += gdm
+SUBDIR+= libtasn1
 
 .include <bsd.port.subdir.mk>
 

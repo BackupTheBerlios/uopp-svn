@@ -16,26 +16,11 @@ PERMIT_DISTFILES_FTP=	Yes
 
 MASTER_SITES=		http://www.thewml.org/distrib/
 
-# Dependencies
-#
-#BUILD_DEPENDS=		???
-#RUN_DEPENDS=		???
-#LIB_DEPENDS=		???
+MODULES=		gettext
+LIB_DEPENDS=		png.4::graphics/png
 
-#USE_GMAKE=		Yes
-# Set CONFIGURE_STYLE to value corresponding to some standard configuration
-# 	  perl [modbuild]: perl's MakeMaker Makefile.PL (modbuild: perl's
-#	  Module::Build Build.PL)
-# 	  gnu [autoconf] [old] [dest]: gnu style configure (old: no
-# 	  sysconfdir), (dest: add DESTDIR, does not handle it),
-# 	  (autoconf: needed by port, implies gnu)
-# 	XXX: cygnus products do NOT use autoconf for making the main
-# 		configure from configure.in
-# 	  imake [noman]: port uses imake for configuration.
-#   	  (noman: no man page installation)
-# 	  simple: port has its own configure script
+USE_GMAKE=		Yes
 CONFIGURE_STYLE=gnu	
-#CONFIGURE_ARGS+=	${CONFIGURE_SHARED}
-#CONFIGURE_ENV=		???
-
+CONFIGURE_ENV=		CPPFLAGS="-I${LOCALBASE}/include -I${LOCALBASE}/include/png"
+CONFIGURE_ENV+=		LDFLAGS="-L${LOCALBASE}/lib"	
 .include <bsd.port.mk>
