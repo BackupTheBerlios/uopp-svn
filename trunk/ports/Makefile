@@ -1,5 +1,6 @@
 # $OpenBSD$
 
+SUBDIR += editors
 SUBDIR += mail
 SUBDIR += net
 SUBDIR += sysutils
