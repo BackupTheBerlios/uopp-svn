@@ -53,16 +53,12 @@ $GRIDLEVEL = 0;
     my ($y, $x, $body, $attr, $i);
     for ($y = 0; $y < $ysize; $y++) {
         #   start of a row
-        <perl:print><tr$class*></perl:print>
+        <perl:print><tr$class></perl:print>
 
         #   create cells in a row
         for ($x = 0; $x < $xsize; $x++) {
             #   get the next cell info
             $body = $CELL_BODY{$n};
- 
- 
-            #   complete the info
-            $class  = " class=\"$class\""      if ($class ne '');
 
             #   insert cell
             <perl:print><td$class>$body</td></perl:print>
@@ -72,7 +68,7 @@ $GRIDLEVEL = 0;
         }
 
         #   end of a row
-        <perl:print></tr*></perl:print>
+        <perl:print></tr></perl:print>
     }
 
     #   end of the table
