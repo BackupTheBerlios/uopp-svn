@@ -10,8 +10,7 @@ update:
 	@(cd ${TOPDIR}/../ports/current && cvs -q update -dP)
 	@(cd ${TOPDIR}/../ports/current/mystuff && svn update)
 
-#generate: clean ${RELEASES} current unofficial templates
-generate: clean unofficial snapshot templates
+generate: clean ${RELEASES} current unofficial snapshot templates
 
 ${RELEASES} current:
 	@mkdir -p ${.TARGET}
