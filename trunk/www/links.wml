@@ -1,0 +1,21 @@
+#include "template.inc"
+
+<divert TITLE>Links</divert>
+
+<divert BODY>
+<h2><dump TITLE /></h2>
+
+<p>Links to other websites related to the OpenBSD ports collection:</p>
+
+<h3>OpenBSD official Ports-pages</h3>
+
+<h3>Pages with unofficial ports</h3>
+
+<ul>
+<li><a href="http://experimental.bug.it/">Experimental OpenBSD ports</a>: Giacomo Cariello's page with his unofficial ports. This doesn't seems to be updated since the 3.2 release.</li>
+<li><a href="http://www.lectroid.net/ports">lectroid.net::ports</a> Marc Matteo's unofficial ports. Marc is an OpenBSD developer, primarily responsible for gnome-related ports. He indexes not yet commited ports and updated versions on this webpage.</li>
+</ul>
+
+<h3>Web-interface to the OpenBSD ports tree</h3>
+
+</divert>

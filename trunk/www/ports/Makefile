@@ -1,15 +1,28 @@
-OLD_RELEASE="3.4"
-NEW_RELEASE="3.5"
 
-TARGETS+=${OLD_RELEASE} ${NEW_RELEASE} current unofficial templates
+RELEASES=3.4 3.5 3.6
 
-${OLD_RELEASE} ${NEW_RELEASE} current:
-	@mkdir -p ${.TARGET} 
-	@(cd ${TOPDIR}/../ports/${.TARGET} && cvs -q update -dP && make \
-		PORTSDIR=${TOPDIR}/../ports/${.TARGET} \
+P2WDIR=${TOPDIR}/../src/p2w
+
+update:
+.for i in ${RELEASES}
+	@(cd ${TOPDIR}/../ports/${i} && cvs -q update -dP)
+.endfor
+	@(cd ${TOPDIR}/../ports/current && cvs -q update -dP)
+	@(cd ${TOPDIR}/../ports/current/mystuff && svn update)
+
+#generate: ${RELEASES} current unofficial templates
+generate: clean current templates
+
+${RELEASES} current:
+	@mkdir -p ${.TARGET}
+	@(cd ${P2WDIR} && PORTSDIR=${TOPDIR}/../ports/${.TARGET} \
 		PORTSDIR_PATH=${TOPDIR}/../ports/${.TARGET} \
-		VERSION=${.TARGET} \
-		WMLDIR=`pwd` wml)
+		PORTSDIR_VERSION=${.TARGET} \
+		BASE_INPUTDIR=${TOPDIR}/../ports/${.TARGET}/archivers \
+		BASE_OUTPUTDIR=${TOPDIR}/ports/${.TARGET}/archivers \
+		BASE_ROOTPATH=/ports/${.TARGET}/archivers \
+		P2WDIR=${P2WDIR} \
+		./make-wml) 
 
 templates:
 	@for i in $$(find * -type d); \
@@ -19,13 +32,13 @@ templates:
 
 unofficial:
 	@mkdir -p ${.TARGET}
-	@(cd ${TOPDIR}/../ports/current/mystuff && svn update && make \
-		PORTSDIR=${TOPDIR}/../ports/${.TARGET} \
+	@(cd ${TOPDIR}/../ports/current/mystuff && make \
+		PORTSDIR=`pwd`/.. \
 		PORTSDIR_PATH=${TOPDIR}/../ports/current/mystuff:${TOPDIR}/../ports/current \
-		VERSION=${.TARGET} \
-		WMLDIR=`pwd`/mystuff TGZ= wml)
+		PORTS_BRANCH=${.TARGET} \
+		WMLDIR=${TOPDIR}/ports/current/mystuff TGZ= wml)
 
 clean:
-	@rm -rf ${OLD_RELEASE} ${NEW_RELEASE} current
+	@rm -rf ${RELEASES} current
 
 .include "Makefile.inc"

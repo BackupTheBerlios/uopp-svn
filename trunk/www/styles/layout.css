@@ -3,6 +3,19 @@ body, html, head, h1 {
    margin: 0px;
 }
 
+div.footer {
+	margin-right: 4px;
+	text-align: center;
+}
+
+p.copyright {
+	font-size: 9pt;
+}
+
+th {
+	text-align: left;
+}
+
 table.header {
 	margin: 0px;
 	width: 100%;
@@ -13,6 +26,15 @@ table.header {
 
 table.body {
 	margin-left: 4px;
+}
+
+table.ports-cats {
+	width: 100%;
+}
+
+table.ports-list {
+	width: 100%;
+	padding: 2px;
 }
 
 td.menu {

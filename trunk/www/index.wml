@@ -16,14 +16,12 @@
 <li><a href="<get-var ROOT />/docs.html">Tutorial about using unofficial OpenBSD ports</a></li>
 
 <li><a href="<get-var ROOT />/code.html">Code</a>:
-<ul>
-<li><a href="<get-var ROOT />/code/p2w.html">Code for generating a web-interface to the ports tree</a></li>
-</ul>
+<dump CODEINDEX />
 </li>
 
 <li><a href="<get-var ROOT />/links.html">Links to other websites related to the OpenBSD ports collection</a></li>
 
-<li><a href="<get-var ROOT /></about.html">About this site</a></li>
+<li><a href="<get-var ROOT />/about.html">About this site</a></li>
  
 </ul>
 

@@ -2,16 +2,42 @@ table.header {
 	background-color: #69c;
 }
 
+table.ports-cats {
+	font-size: 10pt;
+}
+
+table.ports-list {
+	font-size: 10pt;
+}
+
 a:link, a:visited {
   color: black;
   font-weight: bold;
   text-decoration: none;
 }
 
+img.footer {
+	border: 0;
+}
+
 a:hover {
 	color: black;
    font-weight: bold;
    text-decoration: underline;
+}
+
+a.footer:link, a.footer:visited {
+	border: 0;
+	color: black;
+	text-decoration: none;
+	font-weight: normal
+}
+
+a.footer:hover {
+	border: 0;
+	color: black;
+	font-weight: normal;
+	text-decoration: underline;
 }
 
 a.menu_item:link, a.menu_item:visited {

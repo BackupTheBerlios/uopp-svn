@@ -1,0 +1,10 @@
+#include "template.inc"
+
+<divert TITLE>Code</divert>
+
+<divert BODY>
+<h2><dump TITLE /></h2>
+
+<dump CODEINDEX />
+
+</divert>
