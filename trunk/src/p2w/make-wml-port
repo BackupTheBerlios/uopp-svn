@@ -79,12 +79,13 @@ echo "</p>" >> ${D}
 
 if [ "${TGZ}" == "1" ]
 then
-	D_TGZ="${BASE_OUTPUTDIR}/${RPATH}/${NAME}.tgz"
-	(cd ${BASE_INPUTDIR}/${RPATH} && tar -czf ${D_TGZ} $(find * -type f | grep -v CVS | grep -v .svn)) 
+	F=$(echo $RPATH | rev | cut -d"/" -f1 | rev)
+	D_TGZ="${BASE_OUTPUTDIR}/${RPATH}/${F}.tgz"
+	(cd ${BASE_INPUTDIR}/${RPATH}/../ && tar -czf ${D_TGZ} ${F})
 	echo '<p class="ports-entry">' >> ${D}
 	echo '<span class="ports-entry-description">Download: </span>' >> ${D}
 	echo '<span class="ports-entry-value">' >> ${D}
-	echo "<a class=\"ports-entry-value\" href=\"${TREE_ROOTPATH}/${FPATH}/${NAME}.tgz\">get port</a>" >> ${D}
+	echo "<a class=\"ports-entry-value\" href=\"${TREE_ROOTPATH}/${FPATH}/${F}.tgz\">get port</a>" >> ${D}
 	echo "</span>" >> ${D}
 	echo "</p>" >> ${D}
 fi
