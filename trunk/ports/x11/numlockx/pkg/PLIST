@@ -1,0 +1,8 @@
+@comment $OpenBSD$
+bin/numlockx
+doc/
+doc/numlockx/
+doc/numlockx/AUTHORS
+doc/numlockx/LICENSE
+doc/numlockx/README
+doc/numlockx/TODO
