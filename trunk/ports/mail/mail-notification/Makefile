@@ -21,7 +21,7 @@ BUILD_DEPENDS+=         :pkgconfig-*:devel/pkgconfig \
 			:scrollkeeper-*:textproc/scrollkeeper \
 			:p5-XML-Parser-*:textproc/p5-XML-Parser
 RUN_DEPENDS+=		:scrollkeeper-*:textproc/scrollkeeper \
-			:hicolor-icon-theme-*:x11/hicolor-icon-theme
+			:gnome-icon-theme-*:x11/gnome/icon-theme
 LIB_DEPENDS+=		eel-2::x11/gnome/eel
 USE_X11=		Yes
 USE_GMAKE=		Yes
