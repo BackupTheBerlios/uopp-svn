@@ -1,0 +1,11 @@
+#include "template.inc"
+
+<divert TITLE>About this site</divert>
+
+<divert BODY>
+<h2><dump TITLE /></h2>
+
+<p>I created this site because I wanted to be able to automatically generate a web-interface for my local ports collection, which I host in a <a href="http://subversion.tigris.org">Subversion</a> <a href="http://svn.berlios.de/viewcvs/uopp/trunk/ports/">repository</a>. Thanks to <a href="http://developer.berlios.de">BerliOS</a>, I'm able to make my subversion publically repository available.</p>
+
+<p>All pages on this website are generated with <a href="http://www.thewml.org">The Website Meta Language</a>, a powerfull collection of tools for offline site-generation.</p>
+</divert>

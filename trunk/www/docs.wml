@@ -1,0 +1,22 @@
+#include "template.inc"
+
+<divert TITLE>Using an alternative ports-tree</divert>
+
+<divert BODY>
+<h2><dump TITLE /></h2>
+
+<p>It's very easy to integrate an alternative ports tree (like the one available from this website) in the official OpenBSD ports-tree. All you have to do is download this tree and adjust the PORTSDIR_PATH variable.</p>
+
+<p>To use the tree available on this website:</p>
+
+<ul>
+<li>Download the tree: We'll use the /usr/ports/uopp dir here.
+<ul>
+	<li>Snapshot: Download the latest <a href="<get-var ROOT />/ports/uopp-snapshot.tgz">snapshot</a> and extract it in /usr/ports/</li>
+	<li>Subversion: Execute the following command: <kbd>cd /usr/ports; svn checkout svn://svn.berlios.de/uopp/trunk/ports uopp</kbd></li>
+</ul>
+</li>
+<li>add this line to /etc/mk.conf: <kbd>PORTSDIR_PATH=${PORTSDIR}/uopp:${PORTSDIR}</kbd>. The order in which directories appear in the PORTSDIR_PATH variable determines the preference level when searching for dependency packages.</li>
+</ul>
+
+</divert>

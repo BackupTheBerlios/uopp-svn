@@ -10,8 +10,8 @@ update:
 	@(cd ${TOPDIR}/../ports/current && cvs -q update -dP)
 	@(cd ${TOPDIR}/../ports/current/mystuff && svn update)
 
-#generate: ${RELEASES} current unofficial templates
-generate: clean unofficial templates
+#generate: clean ${RELEASES} current unofficial templates
+generate: clean unofficial snapshot templates
 
 ${RELEASES} current:
 	@mkdir -p ${.TARGET}
@@ -25,6 +25,12 @@ ${RELEASES} current:
 		P2WDIR=${P2WDIR} \
 		./make-wml) 
 
+snapshot:
+	@rm -rf uopp 
+	@svn export svn://svn.berlios.de/uopp/trunk/ports uopp
+	@tar -czf uopp-snapshot.tgz uopp
+	@rm -rf uopp 
+
 templates:
 	@for i in $$(find * -type d); \
 	do \
@@ -34,7 +40,7 @@ templates:
 unofficial:
 	@mkdir -p ${TOPDIR}/../ports/current/mystuff
 	@(cd ${P2WDIR} && PORTSDIR=${TOPDIR}/../ports/current \
-		PORTSDIR_PATH=${TOPDIR}/../ports/current/mystuff:${TOPDIR}../ports/current
+		PORTSDIR_PATH=${TOPDIR}/../ports/current/mystuff:${TOPDIR}/../ports/current \
                 PORTSDIR_VERSION=${.TARGET} \
                 BASE_INPUTDIR=${TOPDIR}/../ports/current/mystuff \
                 BASE_OUTPUTDIR=${TOPDIR}/ports/current/mystuff \

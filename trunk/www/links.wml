@@ -9,13 +9,24 @@
 
 <h3>OpenBSD official Ports-pages</h3>
 
+<ul>
+<li><a href="http://www.openbsd.org/ports.html">Start page for all your porting information</a></li><li><a href="http://www.openbsd.org/cgi-bin/cvsweb/ports/">OpenBSD ports CVS Repository</a></li>
+</ul>
+
 <h3>Pages with unofficial ports</h3>
 
 <ul>
 <li><a href="http://experimental.bug.it/">Experimental OpenBSD ports</a>: Giacomo Cariello's page with his unofficial ports. This doesn't seems to be updated since the 3.2 release.</li>
-<li><a href="http://www.lectroid.net/ports">lectroid.net::ports</a> Marc Matteo's unofficial ports. Marc is an OpenBSD developer, primarily responsible for gnome-related ports. He indexes not yet commited ports and updated versions on this webpage.</li>
+<li><a href="http://www.lectroid.net/ports">lectroid.net::ports</a>: Marc Matteo's unofficial ports. Marc is an OpenBSD developer, primarily responsible for gnome-related ports. He indexes not yet commited ports and updated versions on this webpage.</li>
+<li><a href="http://www.erisiandiscord.de/ports/index.html">My OpenBSD Ports</a>: Nikolay Sturm's (OpenBSD developer) collection of ports waiting for inclusion in the main tree. He also has a script to automate port-updating</li>
+<li><a href="http://www.jakemsr.com/openbsd/ports/">openbsd/ports</a>: Jacob Meuser's collection of unofficial ports</li>
+<li><a href="http://ports.openbsd.pl/">Unofficial OpenBSD ports catalog</a>: Aleksander Piotrowski tracks ports@ and indexes submitted ports on his website</li>
 </ul>
 
 <h3>Web-interface to the OpenBSD ports tree</h3>
+
+<ul>
+<li><a href="http://ports.puffy.nu/">OpenBSD Ports - Categories</a>: Andreas Holstenson has written a bunch of php scripts to dynamically generate a webinterface to the latest stable OpenBSD ports tree. The layout that p2w generates is inspired on Andreas website.</li>
+</ul>
 
 </divert>

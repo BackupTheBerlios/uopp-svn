@@ -1,0 +1,51 @@
+#include "template.inc"
+
+<divert TITLE>P2W: Ports to WWW</divert>
+
+<divert BODY>
+<h2><dump TITLE /></h2>
+
+<p>Ports to WWW is tool that allows you to create a browsable www-interface of the OpenBSD ports tree. It depends on <a href="http://www.thewml.org">The Website Meta Language</a> to generate html pages.</p>
+
+<p>P2W can be downloaded <a href="http://developer.berlios.de/project/showfiles.php?group_id=2223">here</a></p>
+
+<h3>Installation Instructions</h3>
+
+<ul>
+<li>Extract the p2w archive. We'll use the /usr/local/share/p2w dir as the base p2w dir.</li>
+<li>Add the following lines to /usr/share/mk/bsd.port.mk:
+<pre>
+P2WDIR=        /usr/local/share/p2w
+.include "${P2WDIR}/mk/p2w.port.mk"
+</pre>
+</li>
+<li>Add the following lines to /usr/share/mk/bsd.port.subdir.mk:
+<pre>
+P2WDIR?=        /usr/local/share/p2w
+.include "${P2WDIR}/mk/p2w.port.subdir.mk"
+</pre>
+</li>
+</ul>
+
+<h3>Usage instructions:</h3>
+
+<p>The script you'll have to start is called <kbd>make-wml</kbd> and is located in /usr/local/share/p2w.</p>
+<p><kbd>make-wml</kbd> needs the following variables set:</p>
+<ul>
+<li><kbd>P2WDIR</kbd>: directory where the p2w archive is extracted. (e.g.: /usr/local/share/p2w)</li>
+<li><kbd>PORTSDIR</kbd>: base ports directory. (e.g.: /usr/ports)</li>
+<li><kbd>PORTSDIR_PATH</kbd>: portsdir paths to search for dependencies (e.g.: /usr/ports/uopp:/usr/ports)</li>
+<li><kbd>PORTSDIR_VERSION</kbd>: portsdir tag-version (e.g.: 3.5 or current)</li>
+<li><kbd>BASE_INPUTDIR</kbd>: directory in the base ports directory where to start creating a web interface (e.g.: /usr/ports/print)</li> 
+<li><kbd>BASE_OUTPUTDIR</kbd>: directory where to create the wml-files (e.g: /var/www/htdocs/ports/print)</li>
+<li><kbd>BASE_ROOTPATH</kbd>: prefix on the webserver to use for created wml-files (e.g.: /ports/print)</li>
+<li><kbd>TREE_ROOTPATH</kbd>: prefix on the webserver for the base ports dir (e.g.: /ports)</li>
+</ul>
+
+<p>If you're using p2w to generate a web-interface for the ports you made yourself, you can also use the following features: </p>
+<ul>
+<li>if you set TGZ="1", make-wml creates tar.gz archives for each port</li> 
+<li>you can create the files pkg/NEW and pkg/UPDATE (relative to the base directory for an individual port. The contents of these files will be included in the ports-description</li>
+</ul>
+
+</divert>
