@@ -2,7 +2,6 @@
 
 #SUBDIR += databases
 SUBDIR += devel
-SUBDIR += editors 
 SUBDIR += mail
 SUBDIR += net
 SUBDIR += security
