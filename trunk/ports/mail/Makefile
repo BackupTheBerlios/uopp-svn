@@ -1,7 +1,7 @@
 # $OpenBSD$
 
 SUBDIR+= dovecot
-SUBDIR+= ezmlm
+SUBDIR+= ezmlm-idx
 SUBDIR+= qmail
 SUBDIR+= qmailanalog
 
