@@ -1,0 +1,60 @@
+#!/bin/sh
+# $OpenBSD$
+#
+# Written by Camiel Dobbelaar <cd@sentia.nl>, 2000
+# This file is in the public domain.
+
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
+NOSHELL=/sbin/nologin
+
+create_group()
+{
+        GROUP=$1
+        GID=$2
+
+        echo -n "Checking group '$GROUP' with gid '$GID': "
+
+	groupinfo -e $GROUP && {
+               	echo "OK, group already exists, but gid not checked." >&2
+               	return
+	}
+	groupinfo -e $GID && {
+                echo "ERR, gid taken." >&2
+                exit 1
+	}
+	echo -n "group does not exist. Create? "
+	groupadd -g $GID $GROUP || {
+                echo "ERR, cannot append to /etc/group" >&2
+                exit 1
+	}
+        echo "OK, created succesfully." >&2
+        return
+}
+
+create_user()
+{
+        NAME=$1;  UID=$2;  GID=$3
+        GECOS=$4; HOME=$5; SHELL=$6
+        
+        echo -n "Checking user '$NAME' with uid '$UID': "
+       
+	userinfo -e $NAME && {
+                echo "OK, user already exists, but uid not checked." >&2
+                return
+	}
+	userinfo -e $UID && {
+                echo "ERR, uid taken." >&2
+                exit 1
+	}
+	echo -n "user does not exist. Create? "
+        useradd -c $GECOS -d $HOME -g $GID -s $SHELL -u $UID $NAME || {
+                echo "ERR, cannot add user to database" >&2
+                exit 1
+	}
+        echo "OK, created successfully." >&2
+        return
+}
+
+create_group vpopmail 2856
+create_user vpopmail 2856 2856 vpopmail /home/users/vpopmail $NOSHELL
+exit 0
