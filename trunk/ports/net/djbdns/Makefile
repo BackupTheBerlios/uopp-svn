@@ -20,7 +20,7 @@ PERMIT_DISTFILES_FTP=	Yes
 ALL_TARGET=	default
 INSTALL_TARGET=	setup check
 
-RUN_DEPENDS=	:daemontools-*:sysutils/daemontools
+RUN_DEPENDS=	:daemontools-*:uopp/sysutils/daemontools
 
 MAN5LIST=	qualification
 MAN1LIST=	dnsfilter dnsipq dnsname dnsqr dnstxt dnsip \

@@ -16,7 +16,7 @@ MASTER_SITES=		http://cr.yp.to/software/ \
 			ftp://ftp.id.wustl.edu/pub/qmail/ \
 			ftp://ftp.net.ohio-state.edu/pub/networking/mail/qmail/
 
-RUN_DEPENDS=		tcpserver::net/ucspi-tcp
+RUN_DEPENDS=		tcpserver::uopp/net/ucspi-tcp
 
 ALL_TARGET=		it man	
 

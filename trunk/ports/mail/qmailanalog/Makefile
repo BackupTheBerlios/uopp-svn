@@ -28,7 +28,7 @@ QMAILDIR=	/var/qmail
 ALL_TARGET=	default
 INSTALL_TARGET=	setup check
 
-RUN_DEPENDS=	:qmail-*:mail/qmail
+RUN_DEPENDS=	:qmail-*:uopp/mail/qmail
 
 pre-build:
 	@echo ${CC} ${CFLAGS} > ${WRKSRC}/conf-cc
