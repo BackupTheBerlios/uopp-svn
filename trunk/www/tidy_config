@@ -1,3 +1,4 @@
+doctype: strict
 output-xhtml: yes
 char-encoding: utf8
 quote-ampersand: yes
