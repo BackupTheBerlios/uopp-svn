@@ -1,6 +1,5 @@
 # $OpenBSD$
 
-SUBDIR += devel
 SUBDIR += mail
 SUBDIR += net
 SUBDIR += security
