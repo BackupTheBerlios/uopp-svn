@@ -30,28 +30,31 @@ PERMIT_DISTFILES_CDROM=	Yes
 PERMIT_DISTFILES_FTP=	Yes
 
 QMAILDIR=	/var/qmail
+LANGUAGES=	ch_GB ch_GB cs cs da da de de en_US en_US es es fr fr hu hu id id it it ja ja nl nl pl pl pt pt pt_BR \
+		pt_BR ru ru sv sv
+EGDIR=		${PREFIX}/share/examples/ezmlm-idx
+
 ALL_TARGET=	it man
 INSTALL_TARGET=	setup
 
 RUN_DEPENDS=	${QMAILDIR}/bin/qmail-local::uopp/mail/qmail
 
-USE_GMAKE=	Yes
-
-#IDXRCLIST=	ch_GB cs da de en_US es fr id it jp pl pt pt_BR ru sv
-#MESSAGE= 	${PKGDIR}/MESSAGE.idx
-
 post-extract:
-	@mv ${WRKDIR}/ezmlm-0.53/* ${WRKDIR}/${DISTNAME}
+	@mv ${WRKDIR}/${DISTNAME}/* ${WRKDIR}/ezmlm-0.53
+	@rmdir ${WRKDIR}/${DISTNAME}
+	@mv ${WRKDIR}/ezmlm-0.53 ${WRKDIR}/${DISTNAME}
 pre-patch:
 	@(cd ${WRKSRC}; patch < idx.patch)
 
-#post-install:
-#	${INSTALL_DATA_DIR} ${PREFIX}/share/examples/ezmlm-idx
-#	${INSTALL_DATA} ${WRKSRC}/ezmlmrc ${PREFIX}/share/examples/ezmlm-idx
-#.for i in ${IDXRCLIST}
-#	${INSTALL_DATA} ${WRKSRC}/ezmlmrc.$i \
-#		${PREFIX}/share/examples/ezmlm-idx
-#.endfor
+post-install:
+	${INSTALL_DATA_DIR} ${EGDIR}
+	${INSTALL_DATA} ${WRKSRC}/ezcgirc ${EGDIR}/ezcgirc
+	${INSTALL_DATA} ${WRKSRC}/ezmlmrc ${EGDIR}/ezmlmrc
+	${INSTALL_DATA} ${WRKSRC}/ezmlmglrc ${EGDIR}/ezmlmglrc
+	${INSTALL_DATA} ${WRKSRC}/ezmlmsubrc ${EGDIR}/ezmlmsubrc
+.for i in ${LANGUAGES}
+	${INSTALL_DATA} ${WRKSRC}/ezmlmrc.$i ${EGDIR}/ezmlmrc.$i 
+.endfor
 
 pre-install:
 	@echo ${PREFIX}/bin > ${WRKSRC}/conf-bin
