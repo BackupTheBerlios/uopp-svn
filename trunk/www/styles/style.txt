@@ -1,0 +1,20 @@
+port-summary			tr a
+port-summary-pkg		td
+port-summary-version		td
+port-summary-comment		td
+link-path			a div
+category-list			a td tr table
+ports-list			table
+ports-list-header		tr td
+ports-entry			p
+ports-entry-description		span
+ports-entry-value		pre span
+header				table tr
+logo				td img
+menu				td div
+menu_item			a
+body				table tr td
+footer				p a img div
+copyright			p a
+
+h2,h3,p,a,ul,li,img,body

@@ -55,6 +55,26 @@ a.menu_item:hover {
  * ports markup rules *
  **********************/
 
+table.category-list, table.ports-list {
+ font-size: small;
+}
+
+tr.ports-list-header {
+ font-style: italic;
+}
+
+a.category-list:link, a.category-list:visited, a.port-summary:link, a.port-summay:visited {
+ color: black;
+ font-weight: normal;
+ text-decoration: none;
+}
+
+a.category-list:hover, a.port-summary:hover {
+ color: black;
+ font-weight: normal;
+ text-decoration: underline;
+}
+
 /***********************
  * Footer markup rules *
  ***********************/
@@ -72,5 +92,5 @@ a.footer:hover, a.copyright:hover {
 }
 
 p.copyright {
- font-size: 9pt;
+ font-size: x-small;
 }

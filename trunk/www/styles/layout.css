@@ -48,6 +48,26 @@ table.body {
  * ports layout rules *
  **********************/
 
+table.category-list, tr.category-list, table.ports-list, tr.ports-list-header, tr.port-summary {
+ width: 100%;
+}
+
+td.category-list {
+ width: 50%;
+}
+
+td.port-summary-pkg {
+ width: 25%
+}
+
+td.port-summary-version {
+ width: 25%
+}
+
+td.port-summary-comment {
+ width: 50%
+}
+
 /***********************
  * Footer layout rules *
  ***********************/
@@ -55,4 +75,5 @@ table.body {
 div.footer {
  margin-right: 4px;
  text-align: center;
+ vertical-align: bottom;
 }
