@@ -1,0 +1,91 @@
+# $OpenBSD$
+
+COMMENT=		"A mail notification for freedesktop.org-compliant system trays"
+DISTNAME=		mail-notification-0.6.2
+CATEGORIES=		mail	
+
+HOMEPAGE=		http://www.nongnu.org/mailnotify/
+	
+MAINTAINER=		Thomas Delaet <thomas@delaet.org>	
+
+# GPL
+PERMIT_PACKAGE_CDROM=	Yes
+PERMIT_PACKAGE_FTP=	Yes 
+PERMIT_DISTFILES_CDROM=	Yes 
+PERMIT_DISTFILES_FTP=	Yes 
+
+MASTER_SITES=		http://savannah.nongnu.org/download/mailnotify/
+
+MODULES=		gettext 
+BUILD_DEPENDS+=         :pkgconfig-*:devel/pkgconfig \
+			:scrollkeeper-*:textproc/scrollkeeper
+RUN_DEPENDS+=		:scrollkeeper-*:textproc/scrollkeeper
+LIB_DEPENDS+=		eel-2::x11/gnome/eel
+USE_X11=		Yes
+USE_GMAKE=		Yes
+CONFIGURE_STYLE=	gnu
+CONFIGURE_ARGS+=        --sysconfdir="${CONFDIR}"
+CONFIGURE_ARGS+=	--disable-schemas-install \
+			--with-gconf-schema-file-dir=${LOCALBASE}/share/schemas/mail-notification
+CPPFLAGS+=		-I${LOCALBASE}/include
+LDFLAGS+=		-L${LOCALBASE}/lib
+CONFIGURE_ENV+=		CPPFLAGS="${CPPFLAGS}" LDFLAGS="${LDFLAGS}"
+
+CONFDIR=		${SYSCONFDIR}/gnome
+SUBST_VARS=		CONFDIR
+
+FLAVORS=		no_mbox no_mh no_maildir no_sylpheed no_pop3 gmail no_imap sasl no_ssl
+FLAVOR?=
+
+.if ${FLAVOR:L:Mno_mbox}
+CONFIGURE_ARGS+=	--disable-mbox
+.endif
+
+.if ${FLAVOR:L:Mno_mh}
+CONFIGURE_ARGS+=	--disable-mh
+.endif
+
+.if ${FLAVOR:L:Mno_maildir}
+CONFIGURE_ARGS+=        --disable-maildir
+.endif
+
+.if ${FLAVOR:L:Mno_sylpheed}
+CONFIGURE_ARGS+=        --disable-sylpheed
+.endif
+
+.if ${FLAVOR:L:Mno_pop3}
+CONFIGURE_ARGS+=        --disable-pop3
+.endif
+
+.if ${FLAVOR:L:Mno_ssl}
+CONFIGURE_ARGS+=	--disable-ssl
+.endif
+
+.if ${FLAVOR:L:Mno_imap}
+CONFIGURE_ARGS+=	--disable-imap
+.endif
+
+.if ${FLAVOR:L:Msasl}
+CONFIGURE_ARGS+=	--enable-sasl
+LIB_DEPENDS+=		sasl2::security/cyrus-sasl2
+.else
+CONFIGURE_ARGS+=	--disable-sasl
+.endif
+
+.if ${FLAVOR:L:Mgmail}
+CONFIGURE_ARGS+=	--enable-gmail
+LIB_DEPENDS+=		soup-2.2.0.0::devel/libsoup
+.else
+CONFIGURE_ARGS+=	--disable-gmail
+.endif
+
+post-patch: 
+	@ln -s /usr/bin/true ${WRKDIR}/bin/scrollkeeper-update
+post-install:
+	${INSTALL_DATA_DIR} ${PREFIX}/share/examples/mail-notification
+	${INSTALL_DATA} ${WRKINST}/etc/sound/events/mail-notification.soundlist \
+			${PREFIX}/share/examples/mail-notification.soundlist
+	${INSTALL_DATA_DIR} ${PREFIX}/share/schemas/mail-notification
+	${INSTALL_DATA} ${WRKSRC}/data/mail-notification.schemas ${PREFIX}/share/schemas/mail-notification/
+
+.include <bsd.port.mk>
