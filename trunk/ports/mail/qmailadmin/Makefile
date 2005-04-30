@@ -16,7 +16,9 @@ PERMIT_DISTFILES_FTP=	Yes
 MASTER_SITES=		 ${MASTER_SITE_SOURCEFORGE:=qmailadmin/}	
 
 RUN_DEPENDS=		:qmail-*:uopp/mail/qmail
+RUN_DEPENDS+=		::uopp/mail/vpopmail
 BUILD_DEPENDS=		:qmail-*:uopp/mail/qmail
+BUILD_DEPENDS+=		::uopp/mail/vpopmail
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS=		--enable-htmldir=/var/www/htdocs  \
