@@ -1,0 +1,12 @@
+$OpenBSD$
+--- src/bib2html.pl.orig	Mon Apr  4 12:02:32 2005
++++ src/bib2html.pl	Mon Apr  4 12:02:45 2005
+@@ -33,7 +33,7 @@ use File::Path ;
+ my $PERLSCRIPTDIR ;
+ BEGIN{
+   # Where is this script?
+-  $PERLSCRIPTDIR = "$0";
++  $PERLSCRIPTDIR = "%%SITE_PERL%%/Bib2HTML";
+   my $scriptdir = dirname( $PERLSCRIPTDIR );
+   while ( -e $PERLSCRIPTDIR && -l $PERLSCRIPTDIR ) {
+     $PERLSCRIPTDIR = readlink($PERLSCRIPTDIR);

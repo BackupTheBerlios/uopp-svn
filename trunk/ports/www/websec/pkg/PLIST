@@ -1,0 +1,22 @@
+@comment $OpenBSD$
+bin/webdiff
+bin/websec
+share/doc/websec/
+share/doc/websec/README
+share/doc/websec/examples/
+share/doc/websec/examples/ignore.list
+share/doc/websec/examples/url.list
+share/emacs/
+share/emacs/site-lisp/
+share/emacs/site-lisp/websec.el
+share/man/
+share/man/man1/
+@man share/man/man1/webdiff.1
+@man share/man/man1/websec.1
+share/man/man5/
+@man share/man/man5/ignore.list.5
+@man share/man/man5/url.list.5
+share/vim/
+share/vim/vim61/
+share/vim/vim61/syntax/
+share/vim/vim61/syntax/websec.vim
