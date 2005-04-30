@@ -36,6 +36,9 @@ CONFIGURE_ARGS+=--without-pam --without-shadow --with-vpopmail \
 CONFIGURE_ENV=	LDFLAGS="-L${LOCALBASE}/lib" \
 		CFLAGS="${CFLAGS} -I${LOCALBASE}/include"
 
+BUILD_DEPENDS+=		::uopp/mail/vpopmail
+RUN_DEPENDS+=		::uopp/mail/vpopmail
+
 post-configure:
 	@perl -pi -e 's|_PREFIX_|${PREFIX}|g' ${WRKSRC}/dovecot-example.conf
 
