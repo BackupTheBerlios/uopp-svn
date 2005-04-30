@@ -10,7 +10,7 @@
 -libdir          = $(prefix)/lib$(libsubdir)
 -mandir          = $(prefix)/man
 +libdir          = $(DESTDIR)/$(prefix)/lib$(libsubdir)
-+mandir          = $(DESTDIR)/$(prefix)/man
++mandir          = $(DESTDIR)/$(prefix)/share/doc/wml
  catdir          = @catdir@
  tmpdir          = @tmpdir@
  
