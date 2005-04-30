@@ -17,9 +17,12 @@ MASTER_SITES=		 ${MASTER_SITE_SOURCEFORGE:=qmailadmin/}
 
 RUN_DEPENDS=		:qmail-*:uopp/mail/qmail
 RUN_DEPENDS+=		::uopp/mail/vpopmail
+RUN_DEPENDS+=		::uopp/mail/autorespond
 BUILD_DEPENDS=		:qmail-*:uopp/mail/qmail
 BUILD_DEPENDS+=		::uopp/mail/vpopmail
+BUILD_DEPENDS+=		::uopp/mail/autorespond
 
+WANTLIB=		c
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS=		--enable-htmldir=/var/www/htdocs  \
 			--disable-ezmlm-mysql \

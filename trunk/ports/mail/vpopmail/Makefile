@@ -18,6 +18,7 @@ MASTER_SITES=		 ${MASTER_SITE_SOURCEFORGE:=vpopmail/}
 RUN_DEPENDS=		:qmail-*:uopp/mail/qmail
 BUILD_DEPENDS=		:qmail-*:uopp/mail/qmail
 
+WANTLIB=		c
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS=		--enable-qmaildir=/var/qmail \
 			--enable-qmail-newu=/var/qmail/bin/qmail-newu \

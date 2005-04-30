@@ -15,6 +15,8 @@ PERMIT_DISTFILES_FTP=	Yes
 
 MASTER_SITES=		 ${MASTER_SITE_SOURCEFORGE:=qmailadmin/}	
 
+WANTLIB=		c
+
 RUN_DEPENDS=		:qmail-*:uopp/mail/qmail
 BUILD_DEPENDS=		:qmail-*:uopp/mail/qmail
 
