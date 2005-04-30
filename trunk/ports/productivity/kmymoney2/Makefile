@@ -38,5 +38,6 @@ CONFIGURE_ENV=          ${MODKDE_CONFIGURE_ENV}
 
 post-install:
 	@mv ${WRKINST}/usr/local/share/apps/kmymoney2/icons/hicolor ${WRKINST}/usr/local/share/apps/kmymoney2/icons/crystalsvg
+	@mv ${WRKINST}/usr/local/share/icons/hicolor ${WRKINST}/usr/local/share/icons/crystalsvg
 
 .include <bsd.port.mk>
