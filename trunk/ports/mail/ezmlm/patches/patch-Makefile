@@ -1,0 +1,12 @@
+$OpenBSD$
+--- Makefile.orig	Thu Mar 31 20:47:01 2005
++++ Makefile	Thu Mar 31 20:47:09 2005
+@@ -610,7 +610,7 @@ compile seek_set.c seek_set.c seek.h see
+ 	./compile seek_set.c
+ 
+ setup: \
+-it man install conf-bin conf-man
++install conf-bin conf-man
+ 	./install "`head -1 conf-bin`" < BIN
+ 	./install "`head -1 conf-man`" < MAN
+ 

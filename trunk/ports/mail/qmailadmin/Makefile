@@ -24,7 +24,7 @@ CONFIGURE_ARGS=		--enable-htmldir=/var/www/htdocs  \
 			--enable-modify-quota \
 			--enable-vpopgroup=vpopmail \
 			--enable-vpopmaildir=/var/vpopmail \
-			--enable-ezmlmdir=${PREFIX}/bin
+			--disable-ezmlmdir
 	
 INSTALL_TARGET=		install-strip
 
