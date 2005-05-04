@@ -18,9 +18,11 @@ MASTER_SITES=		 ${MASTER_SITE_SOURCEFORGE:=qmailadmin/}
 RUN_DEPENDS=		:qmail-*:uopp/mail/qmail
 RUN_DEPENDS+=		::uopp/mail/vpopmail
 RUN_DEPENDS+=		::uopp/mail/autorespond
+RUN_DEPENDS+=		::uopp/mail/ezmlm-idx
 BUILD_DEPENDS=		:qmail-*:uopp/mail/qmail
 BUILD_DEPENDS+=		::uopp/mail/vpopmail
 BUILD_DEPENDS+=		::uopp/mail/autorespond
+BUILD_DEPENDS+=		::uopp/mail/ezmlm-idx
 
 WANTLIB=		c
 CONFIGURE_STYLE=	gnu
@@ -29,7 +31,7 @@ CONFIGURE_ARGS=		--enable-htmldir=/var/www/htdocs  \
 			--enable-modify-quota \
 			--enable-vpopgroup=vpopmail \
 			--enable-vpopmaildir=/var/vpopmail \
-			--disable-ezmlmdir
+			--enable-ezmlmdir=${LOCALBASE}/ezmlm
 	
 INSTALL_TARGET=		install-strip
 
