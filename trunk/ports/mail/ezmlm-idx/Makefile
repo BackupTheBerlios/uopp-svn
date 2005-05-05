@@ -57,7 +57,7 @@ post-install:
 .endfor
 
 pre-install:
-	@echo ${PREFIX}/ezmlm > ${WRKSRC}/conf-bin
+	@echo ${PREFIX}/bin/ezmlm > ${WRKSRC}/conf-bin
 	@echo ${PREFIX}/man > ${WRKSRC}/conf-man
 
 .include <bsd.port.mk>
